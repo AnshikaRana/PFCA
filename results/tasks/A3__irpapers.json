@@ -1,0 +1,22 @@
+{
+ "arch": "A3",
+ "arch_name": "IRPAPERS",
+ "dataset": "irpapers",
+ "fidelity": "native",
+ "deviations": [],
+ "format_card": {
+  "query": "Page-grounded question",
+  "document": "Page (OCR text; page image for image models)",
+  "answer": "One gold page (Recall@K = Success@K)",
+  "search": "Full page collection (3,230 pages)"
+ },
+ "stats": {
+  "n_docs": 3230,
+  "n_queries": 180,
+  "avg_gold_per_query": 1.0,
+  "avg_pool_size": null
+ },
+ "unit": "page",
+ "gold_level": "doc",
+ "has_page_images": true
+}

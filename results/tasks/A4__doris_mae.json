@@ -1,0 +1,26 @@
+{
+ "arch": "A4",
+ "arch_name": "MAPLE",
+ "dataset": "doris_mae",
+ "fidelity": "approximate",
+ "deviations": [
+  "[approx] No full text: the abstract stands in for the holistic paper.",
+  "Aspect queries = DORIS aspects with score >= 1 for each relevant paper (the paper is their target).",
+  "Search space = all 363,133 abstracts."
+ ],
+ "format_card": {
+  "query": "Aspect query (motivation / method / experiment-result), many per paper",
+  "document": "Whole paper, holistic full text (truncated to model max input)",
+  "answer": "One target paper per query; queries grouped by paper",
+  "search": "Full corpus (363,133 papers)"
+ },
+ "stats": {
+  "n_docs": 363133,
+  "n_queries": 7628,
+  "avg_gold_per_query": 1.0,
+  "avg_pool_size": null
+ },
+ "unit": "paper",
+ "gold_level": "doc",
+ "has_page_images": false
+}

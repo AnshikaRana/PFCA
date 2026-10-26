@@ -1,0 +1,27 @@
+{
+ "arch": "A3",
+ "arch_name": "IRPAPERS",
+ "dataset": "litsearch",
+ "fidelity": "approximate",
+ "deviations": [
+  "[approx] No real pages: full text split into ~800-word pseudo-pages.",
+  "[approx] Gold is paper-level: a query succeeds if any page of a gold paper is retrieved (IRPAPERS gold is a single page).",
+  "Image-track models are N/A: this dataset has no page images.",
+  "Pages capped at 3 per paper."
+ ],
+ "format_card": {
+  "query": "Page-grounded question",
+  "document": "Page (OCR text; page image for image models)",
+  "answer": "Gold paper(s); success if any of its pages is retrieved",
+  "search": "Full page collection (189,216 pages)"
+ },
+ "stats": {
+  "n_docs": 189216,
+  "n_queries": 597,
+  "avg_gold_per_query": 1.07,
+  "avg_pool_size": null
+ },
+ "unit": "page",
+ "gold_level": "paper",
+ "has_page_images": false
+}

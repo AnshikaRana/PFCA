@@ -1,0 +1,27 @@
+{
+ "arch": "A2",
+ "arch_name": "DORIS-MAE",
+ "dataset": "irpapers",
+ "fidelity": "faithful",
+ "deviations": [
+  "Candidate pools built with the DORIS recipe: BM25 paragraph+sentence (~80) + 20 dense (bge-small-en-v1.5, outside every zoo) + gold, shuffled.",
+  "Binary gold mapped to graded scale: gold = 2, other pooled = 0 (relevant iff >= 1).",
+  "Query has no aspect decomposition; sentence-by-sentence mode uses sentence splitting.",
+  "Pages lifted to papers: abstract = page-1 transcription; gold page -> its paper."
+ ],
+ "format_card": {
+  "query": "Complex multi-aspect paragraph (whole string or sentence-by-sentence)",
+  "document": "Abstract",
+  "answer": "Graded relevance over the candidate pool; relevant iff score >= 1",
+  "search": "Re-rank ~100-paper pool per query"
+ },
+ "stats": {
+  "n_docs": 166,
+  "n_queries": 180,
+  "avg_gold_per_query": 1.0,
+  "avg_pool_size": 100.0
+ },
+ "unit": "abstract",
+ "gold_level": "doc",
+ "has_page_images": false
+}

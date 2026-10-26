@@ -1,0 +1,27 @@
+{
+ "arch": "A1",
+ "arch_name": "LitSearch",
+ "dataset": "doris_mae",
+ "fidelity": "faithful",
+ "deviations": [
+  "Graded relevance binarised with DORIS's own rule S(p|Q)/|Q| >= 1.",
+  "Search space = all 363,133 abstracts (LitSearch searches the full corpus), not the 100-paper pools.",
+  "Specificity derived from gold-set size (<=5 specific, else broad).",
+  "9 queries dropped: no relevant document."
+ ],
+ "format_card": {
+  "query": "Natural-language literature-search question (+ broad/specific tag)",
+  "document": "Paper = title + abstract",
+  "answer": "Set of gold papers, binary relevance",
+  "search": "Full corpus (363,133 papers)"
+ },
+ "stats": {
+  "n_docs": 363133,
+  "n_queries": 91,
+  "avg_gold_per_query": 18.04,
+  "avg_pool_size": null
+ },
+ "unit": "paper",
+ "gold_level": "doc",
+ "has_page_images": false
+}

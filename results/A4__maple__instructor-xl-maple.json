@@ -1,0 +1,77 @@
+{
+  "arch": "A4",
+  "arch_name": "MAPLE",
+  "dataset": "maple",
+  "model_key": "instructor-xl-maple",
+  "model_name": "Instructor-XL",
+  "tier": "kaggle",
+  "status": "done",
+  "reason": "",
+  "recall@10": 30.55,
+  "recall@10_se": 1.02,
+  "native": {
+    "AllAspect@5": 0.48,
+    "AnyAspect@5": 71.43,
+    "AspectCoverage@5": 23.09,
+    "AllAspect@10": 0.95,
+    "AnyAspect@10": 79.05,
+    "AspectCoverage@10": 30.94,
+    "AllAspect@20": 2.86,
+    "AnyAspect@20": 90.48,
+    "AspectCoverage@20": 39.78,
+    "n_target_papers": 210,
+    "avg_queries_per_paper": 9.98
+  },
+  "breakdown": {
+    "experiment/result": {
+      "R@5": 18.02,
+      "R@10": 25.61,
+      "R@20": 34.46,
+      "n": 949
+    },
+    "method": {
+      "R@5": 24.19,
+      "R@10": 32.1,
+      "R@20": 40.78,
+      "n": 922
+    },
+    "motivation": {
+      "R@5": 37.05,
+      "R@10": 45.09,
+      "R@20": 54.46,
+      "n": 224
+    },
+    "text-referenced": {
+      "R@10": 30.48,
+      "n": 1680
+    },
+    "multimodal-referenced": {
+      "R@10": 30.84,
+      "n": 415
+    }
+  },
+  "task": {
+    "arch": "A4",
+    "arch_name": "MAPLE",
+    "dataset": "maple",
+    "fidelity": "native",
+    "deviations": [],
+    "format_card": {
+      "query": "Aspect query (motivation / method / experiment-result), many per paper",
+      "document": "Whole paper, holistic full text (truncated to model max input)",
+      "answer": "One target paper per query; queries grouped by paper",
+      "search": "Full corpus (73,973 papers)"
+    },
+    "stats": {
+      "n_docs": 73973,
+      "n_queries": 2095,
+      "avg_gold_per_query": 1.0,
+      "avg_pool_size": null
+    },
+    "unit": "paper",
+    "gold_level": "doc",
+    "has_page_images": false
+  },
+  "per_query_recall@10": {},
+  "note": "Run on Kaggle (2x T4); per-query recalls kept in Kaggle output."
+}

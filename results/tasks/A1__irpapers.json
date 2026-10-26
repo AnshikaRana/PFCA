@@ -1,0 +1,26 @@
+{
+ "arch": "A1",
+ "arch_name": "LitSearch",
+ "dataset": "irpapers",
+ "fidelity": "faithful",
+ "deviations": [
+  "Pages lifted to papers: document = title + page-1 transcription (abstract area).",
+  "Gold page mapped to its paper; corpus is only 166 papers.",
+  "All questions are single-gold, so all are 'specific'."
+ ],
+ "format_card": {
+  "query": "Natural-language literature-search question (+ broad/specific tag)",
+  "document": "Paper = title + abstract",
+  "answer": "Set of gold papers, binary relevance",
+  "search": "Full corpus (166 papers)"
+ },
+ "stats": {
+  "n_docs": 166,
+  "n_queries": 180,
+  "avg_gold_per_query": 1.0,
+  "avg_pool_size": null
+ },
+ "unit": "paper",
+ "gold_level": "doc",
+ "has_page_images": false
+}

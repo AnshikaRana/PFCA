@@ -1,0 +1,17 @@
+# Install PyTorch first (CUDA 12.4 wheels work with your 13.x driver):
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+numpy
+scipy
+PyStemmer              # Porter stemming for BM25 (as in Lucene/Pyserini)
+datasets
+huggingface_hub
+pillow
+sentence-transformers>=3.0
+transformers
+accelerate
+adapters               # SPECTER2 adapters
+einops
+# --- optional, per model family ---
+colpali-engine>=0.3.12 # ColModernVBERT / ColPali / ColQwen2 / MUVERA (IRPAPERS images)
+pylate                 # ColBERT-v2 (DORIS-MAE zoo)
+gritlm                 # GritLM-7B (Kaggle tier)

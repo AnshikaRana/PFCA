@@ -1,0 +1,22 @@
+{
+ "arch": "A2",
+ "arch_name": "DORIS-MAE",
+ "dataset": "doris_mae",
+ "fidelity": "native",
+ "deviations": [],
+ "format_card": {
+  "query": "Complex multi-aspect paragraph (whole string or sentence-by-sentence)",
+  "document": "Abstract",
+  "answer": "Graded relevance over the candidate pool; relevant iff score >= 1",
+  "search": "Re-rank ~109-paper pool per query"
+ },
+ "stats": {
+  "n_docs": 8482,
+  "n_queries": 100,
+  "avg_gold_per_query": 16.42,
+  "avg_pool_size": 109.3
+ },
+ "unit": "abstract",
+ "gold_level": "doc",
+ "has_page_images": false
+}

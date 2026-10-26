@@ -1,0 +1,22 @@
+{
+ "arch": "A1",
+ "arch_name": "LitSearch",
+ "dataset": "litsearch",
+ "fidelity": "native",
+ "deviations": [],
+ "format_card": {
+  "query": "Natural-language literature-search question (+ broad/specific tag)",
+  "document": "Paper = title + abstract",
+  "answer": "Set of gold papers, binary relevance",
+  "search": "Full corpus (64,183 papers)"
+ },
+ "stats": {
+  "n_docs": 64183,
+  "n_queries": 597,
+  "avg_gold_per_query": 1.07,
+  "avg_pool_size": null
+ },
+ "unit": "paper",
+ "gold_level": "doc",
+ "has_page_images": false
+}

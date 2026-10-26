@@ -1,0 +1,4841 @@
+{
+ "generated": "2026-10-24 16:15 UTC",
+ "gate": 3.0,
+ "alpha": 0.05,
+ "n_perm": 20000,
+ "arch_names": {
+  "A1": "LitSearch",
+  "A2": "DORIS-MAE",
+  "A3": "IRPAPERS",
+  "A4": "MAPLE"
+ },
+ "dataset_names": {
+  "litsearch": "LitSearch",
+  "doris_mae": "DORIS-MAE",
+  "irpapers": "IRPAPERS",
+  "maple": "MAPLE"
+ },
+ "native": {
+  "A1": "litsearch",
+  "A2": "doris_mae",
+  "A3": "irpapers",
+  "A4": "maple"
+ },
+ "headline": {
+  "n_results": 112,
+  "n_pending": 2,
+  "validation": {
+   "checked": 29,
+   "passed": 16,
+   "outside_higher": 9,
+   "outside_lower": 4,
+   "outside": [
+    "BM25 (LitSearch)",
+    "SimCSE (DORIS-MAE)",
+    "ANCE-FirstP (DORIS-MAE)",
+    "BM25 (DORIS-MAE)",
+    "ColBERT-v2 (DORIS-MAE)",
+    "ERNIE (DORIS-MAE)",
+    "SciBERT (DORIS-MAE)",
+    "Hybrid text (BM25 + Arctic, RSF) (IRPAPERS)",
+    "ColPali (IRPAPERS)",
+    "Multimodal hybrid (text hybrid + ColModernVBERT) (IRPAPERS)",
+    "MUVERA (ColModernVBERT FDE, ef=1024) (IRPAPERS)",
+    "SPECTER2 (MAPLE)",
+    "Instructor-XL (MAPLE)"
+   ]
+  },
+  "ranking": {
+   "mean_tau": 0.35,
+   "min_tau": -0.2,
+   "max_tau": 0.795,
+   "winner_kept": "7/12"
+  },
+  "bm25_format_spread": {
+   "LitSearch": 10.35,
+   "DORIS-MAE": 19.09,
+   "IRPAPERS": 10.05,
+   "MAPLE": 18.0
+  }
+ },
+ "validation": [
+  {
+   "arch": "A1",
+   "dataset": "litsearch",
+   "key": "bm25",
+   "name": "BM25",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "broad_R@20",
+     "reported": 39.9,
+     "measured": 43.27,
+     "diff": 3.37
+    },
+    {
+     "metric": "specific_R@5",
+     "reported": 50.0,
+     "measured": 54.07,
+     "diff": 4.07
+    }
+   ],
+   "max_abs_diff": 4.07,
+   "worst_signed": 4.07,
+   "direction": "higher",
+   "verdict": "outside",
+   "note": ""
+  },
+  {
+   "arch": "A1",
+   "dataset": "litsearch",
+   "key": "gtr-t5-large",
+   "name": "GTR-T5-large",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "broad_R@20",
+     "reported": 43.8,
+     "measured": 43.05,
+     "diff": -0.75
+    },
+    {
+     "metric": "specific_R@5",
+     "reported": 39.6,
+     "measured": 38.91,
+     "diff": -0.69
+    }
+   ],
+   "max_abs_diff": 0.75,
+   "worst_signed": -0.75,
+   "direction": null,
+   "verdict": "pass",
+   "note": ""
+  },
+  {
+   "arch": "A1",
+   "dataset": "litsearch",
+   "key": "instructor-xl-litsearch",
+   "name": "Instructor-XL",
+   "tier": "kaggle",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "broad_R@20",
+     "reported": 56.5,
+     "measured": 56.17,
+     "diff": -0.33
+    },
+    {
+     "metric": "specific_R@5",
+     "reported": 52.3,
+     "measured": 51.92,
+     "diff": -0.38
+    }
+   ],
+   "max_abs_diff": 0.38,
+   "worst_signed": -0.38,
+   "direction": null,
+   "verdict": "pass",
+   "note": "Run on Kaggle (2x T4); per-query recalls copied from the Kaggle output (query order verified against the local BM25 run)."
+  },
+  {
+   "arch": "A1",
+   "dataset": "litsearch",
+   "key": "e5-large-v2",
+   "name": "E5-large-v2",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "broad_R@20",
+     "reported": 55.4,
+     "measured": 56.6,
+     "diff": 1.2
+    },
+    {
+     "metric": "specific_R@5",
+     "reported": 56.2,
+     "measured": 56.33,
+     "diff": 0.13
+    }
+   ],
+   "max_abs_diff": 1.2,
+   "worst_signed": 1.2,
+   "direction": null,
+   "verdict": "pass",
+   "note": ""
+  },
+  {
+   "arch": "A1",
+   "dataset": "litsearch",
+   "key": "gritlm-7b-litsearch",
+   "name": "GritLM-7B",
+   "tier": "kaggle",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "broad_R@20",
+     "reported": 70.8,
+     "measured": 69.42,
+     "diff": -1.38
+    },
+    {
+     "metric": "specific_R@5",
+     "reported": 74.8,
+     "measured": 74.21,
+     "diff": -0.59
+    }
+   ],
+   "max_abs_diff": 1.38,
+   "worst_signed": -1.38,
+   "direction": null,
+   "verdict": "pass",
+   "note": "Run on Kaggle (2x T4); per-query recalls copied from the Kaggle output (query order verified against the local BM25 run)."
+  },
+  {
+   "arch": "A1",
+   "dataset": "litsearch",
+   "key": "gpt4o-rerank-bm25",
+   "name": "GPT-4o reranking (w/ BM25)",
+   "tier": "api",
+   "status": "not_run"
+  },
+  {
+   "arch": "A1",
+   "dataset": "litsearch",
+   "key": "gpt4o-onehop-bm25",
+   "name": "GPT-4o one-hop (w/ BM25)",
+   "tier": "api",
+   "status": "not_run"
+  },
+  {
+   "arch": "A1",
+   "dataset": "litsearch",
+   "key": "gpt4o-rerank-gritlm",
+   "name": "GPT-4o reranking (w/ GritLM)",
+   "tier": "api",
+   "status": "not_run"
+  },
+  {
+   "arch": "A1",
+   "dataset": "litsearch",
+   "key": "gpt4o-onehop-gritlm",
+   "name": "GPT-4o one-hop (w/ GritLM)",
+   "tier": "api",
+   "status": "not_run"
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "e5-large-v2-doris",
+   "name": "E5-L-v2",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@5",
+     "reported": 16.51,
+     "measured": 16.07,
+     "diff": -0.44
+    },
+    {
+     "metric": "R@20",
+     "reported": 43.77,
+     "measured": 43.18,
+     "diff": -0.59
+    },
+    {
+     "metric": "RP",
+     "reported": 37.46,
+     "measured": 35.32,
+     "diff": -2.14
+    },
+    {
+     "metric": "NDCGexp@10%",
+     "reported": 25.9,
+     "measured": 25.98,
+     "diff": 0.08
+    },
+    {
+     "metric": "MRR@10",
+     "reported": 14.85,
+     "measured": 12.37,
+     "diff": -2.48
+    },
+    {
+     "metric": "MAP",
+     "reported": 40.49,
+     "measured": 40.11,
+     "diff": -0.38
+    }
+   ],
+   "max_abs_diff": 2.48,
+   "worst_signed": -2.48,
+   "direction": null,
+   "verdict": "pass",
+   "note": ""
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "rocketqa-v2",
+   "name": "RocketQA-v2",
+   "tier": "external",
+   "status": "not_run"
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "ada-002",
+   "name": "ada-002",
+   "tier": "api",
+   "status": "not_run"
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "simcse",
+   "name": "SimCSE",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@5",
+     "reported": 14.9,
+     "measured": 12.11,
+     "diff": -2.79
+    },
+    {
+     "metric": "R@20",
+     "reported": 42.62,
+     "measured": 36.42,
+     "diff": -6.2
+    },
+    {
+     "metric": "RP",
+     "reported": 35.27,
+     "measured": 31.2,
+     "diff": -4.07
+    },
+    {
+     "metric": "NDCGexp@10%",
+     "reported": 26.88,
+     "measured": 21.72,
+     "diff": -5.16
+    },
+    {
+     "metric": "MRR@10",
+     "reported": 21.19,
+     "measured": 14.6,
+     "diff": -6.59
+    },
+    {
+     "metric": "MAP",
+     "reported": 39.02,
+     "measured": 33.83,
+     "diff": -5.19
+    }
+   ],
+   "max_abs_diff": 6.59,
+   "worst_signed": -6.59,
+   "direction": "lower",
+   "verdict": "outside",
+   "note": ""
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "splade-v2",
+   "name": "SPLADE-v2",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@5",
+     "reported": 14.78,
+     "measured": 14.26,
+     "diff": -0.52
+    },
+    {
+     "metric": "R@20",
+     "reported": 40.14,
+     "measured": 42.39,
+     "diff": 2.25
+    },
+    {
+     "metric": "RP",
+     "reported": 31.65,
+     "measured": 32.5,
+     "diff": 0.85
+    },
+    {
+     "metric": "NDCGexp@10%",
+     "reported": 26.08,
+     "measured": 27.08,
+     "diff": 1.0
+    },
+    {
+     "metric": "MRR@10",
+     "reported": 17.82,
+     "measured": 17.47,
+     "diff": -0.35
+    },
+    {
+     "metric": "MAP",
+     "reported": 37.23,
+     "measured": 37.5,
+     "diff": 0.27
+    }
+   ],
+   "max_abs_diff": 2.25,
+   "worst_signed": 2.25,
+   "direction": null,
+   "verdict": "pass",
+   "note": ""
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "specter-v2",
+   "name": "SPECTER-v2",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@5",
+     "reported": 14.5,
+     "measured": 14.35,
+     "diff": -0.15
+    },
+    {
+     "metric": "R@20",
+     "reported": 43.36,
+     "measured": 43.2,
+     "diff": -0.16
+    },
+    {
+     "metric": "RP",
+     "reported": 33.41,
+     "measured": 33.12,
+     "diff": -0.29
+    },
+    {
+     "metric": "NDCGexp@10%",
+     "reported": 25.65,
+     "measured": 26.47,
+     "diff": 0.82
+    },
+    {
+     "metric": "MRR@10",
+     "reported": 17.19,
+     "measured": 17.41,
+     "diff": 0.22
+    },
+    {
+     "metric": "MAP",
+     "reported": 37.12,
+     "measured": 37.05,
+     "diff": -0.07
+    }
+   ],
+   "max_abs_diff": 0.82,
+   "worst_signed": 0.82,
+   "direction": null,
+   "verdict": "pass",
+   "note": ""
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "ts-aspire",
+   "name": "TSAspire",
+   "tier": "external",
+   "status": "not_run"
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "sentbert",
+   "name": "SentBERT",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@5",
+     "reported": 14.09,
+     "measured": 14.47,
+     "diff": 0.38
+    },
+    {
+     "metric": "R@20",
+     "reported": 44.69,
+     "measured": 44.79,
+     "diff": 0.1
+    },
+    {
+     "metric": "RP",
+     "reported": 33.79,
+     "measured": 32.72,
+     "diff": -1.07
+    },
+    {
+     "metric": "NDCGexp@10%",
+     "reported": 21.88,
+     "measured": 23.3,
+     "diff": 1.42
+    },
+    {
+     "metric": "MRR@10",
+     "reported": 13.23,
+     "measured": 13.57,
+     "diff": 0.34
+    },
+    {
+     "metric": "MAP",
+     "reported": 37.75,
+     "measured": 37.34,
+     "diff": -0.41
+    }
+   ],
+   "max_abs_diff": 1.42,
+   "worst_signed": 1.42,
+   "direction": null,
+   "verdict": "pass",
+   "note": ""
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "ot-aspire",
+   "name": "OTAspire",
+   "tier": "external",
+   "status": "not_run"
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "ance-firstp",
+   "name": "ANCE-FirstP",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@5",
+     "reported": 13.21,
+     "measured": 11.96,
+     "diff": -1.25
+    },
+    {
+     "metric": "R@20",
+     "reported": 34.54,
+     "measured": 34.82,
+     "diff": 0.28
+    },
+    {
+     "metric": "RP",
+     "reported": 30.51,
+     "measured": 28.77,
+     "diff": -1.74
+    },
+    {
+     "metric": "NDCGexp@10%",
+     "reported": 20.3,
+     "measured": 16.99,
+     "diff": -3.31
+    },
+    {
+     "metric": "MRR@10",
+     "reported": 13.87,
+     "measured": 9.89,
+     "diff": -3.98
+    },
+    {
+     "metric": "MAP",
+     "reported": 34.53,
+     "measured": 33.14,
+     "diff": -1.39
+    }
+   ],
+   "max_abs_diff": 3.98,
+   "worst_signed": -3.98,
+   "direction": "lower",
+   "verdict": "outside",
+   "note": ""
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "llama-7b",
+   "name": "LLAMA",
+   "tier": "kaggle",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@5",
+     "reported": 12.74,
+     "measured": 12.78,
+     "diff": 0.04
+    },
+    {
+     "metric": "R@20",
+     "reported": 34.51,
+     "measured": 34.61,
+     "diff": 0.1
+    },
+    {
+     "metric": "RP",
+     "reported": 28.33,
+     "measured": 28.36,
+     "diff": 0.03
+    },
+    {
+     "metric": "NDCGexp@10%",
+     "reported": 16.65,
+     "measured": 15.85,
+     "diff": -0.8
+    },
+    {
+     "metric": "MRR@10",
+     "reported": 11.78,
+     "measured": 9.47,
+     "diff": -2.31
+    },
+    {
+     "metric": "MAP",
+     "reported": 31.29,
+     "measured": 31.33,
+     "diff": 0.04
+    }
+   ],
+   "max_abs_diff": 2.31,
+   "worst_signed": -2.31,
+   "direction": null,
+   "verdict": "pass",
+   "note": "Run on Kaggle (2x T4); per-query recalls copied from the Kaggle output (query order verified against the local BM25 run)."
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "simlm",
+   "name": "SimLM",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@5",
+     "reported": 12.68,
+     "measured": 12.87,
+     "diff": 0.19
+    },
+    {
+     "metric": "R@20",
+     "reported": 35.67,
+     "measured": 34.65,
+     "diff": -1.02
+    },
+    {
+     "metric": "RP",
+     "reported": 28.9,
+     "measured": 29.14,
+     "diff": 0.24
+    },
+    {
+     "metric": "NDCGexp@10%",
+     "reported": 18.91,
+     "measured": 19.32,
+     "diff": 0.41
+    },
+    {
+     "metric": "MRR@10",
+     "reported": 11.29,
+     "measured": 11.48,
+     "diff": 0.19
+    },
+    {
+     "metric": "MAP",
+     "reported": 33.06,
+     "measured": 32.83,
+     "diff": -0.23
+    }
+   ],
+   "max_abs_diff": 1.02,
+   "worst_signed": -1.02,
+   "direction": null,
+   "verdict": "pass",
+   "note": ""
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "bm25",
+   "name": "BM25",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@5",
+     "reported": 8.47,
+     "measured": 14.03,
+     "diff": 5.56
+    },
+    {
+     "metric": "R@20",
+     "reported": 30.5,
+     "measured": 40.04,
+     "diff": 9.54
+    },
+    {
+     "metric": "RP",
+     "reported": 21.94,
+     "measured": 31.34,
+     "diff": 9.4
+    },
+    {
+     "metric": "NDCGexp@10%",
+     "reported": 13.23,
+     "measured": 28.26,
+     "diff": 15.03
+    },
+    {
+     "metric": "MRR@10",
+     "reported": 9.19,
+     "measured": 19.8,
+     "diff": 10.61
+    },
+    {
+     "metric": "MAP",
+     "reported": 25.99,
+     "measured": 37.1,
+     "diff": 11.11
+    }
+   ],
+   "max_abs_diff": 15.03,
+   "worst_signed": 15.03,
+   "direction": "higher",
+   "verdict": "outside",
+   "note": ""
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "colbert-v2",
+   "name": "ColBERT-v2",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@5",
+     "reported": 8.45,
+     "measured": 11.55,
+     "diff": 3.1
+    },
+    {
+     "metric": "R@20",
+     "reported": 27.86,
+     "measured": 41.56,
+     "diff": 13.7
+    },
+    {
+     "metric": "RP",
+     "reported": 22.33,
+     "measured": 31.82,
+     "diff": 9.49
+    },
+    {
+     "metric": "NDCGexp@10%",
+     "reported": 12.57,
+     "measured": 24.22,
+     "diff": 11.65
+    },
+    {
+     "metric": "MRR@10",
+     "reported": 6.69,
+     "measured": 15.78,
+     "diff": 9.09
+    },
+    {
+     "metric": "MAP",
+     "reported": 25.8,
+     "measured": 34.87,
+     "diff": 9.07
+    }
+   ],
+   "max_abs_diff": 13.7,
+   "worst_signed": 13.7,
+   "direction": "higher",
+   "verdict": "outside",
+   "note": ""
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "tfidf",
+   "name": "TF-IDF",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@5",
+     "reported": 10.71,
+     "measured": 12.36,
+     "diff": 1.65
+    },
+    {
+     "metric": "R@20",
+     "reported": 29.22,
+     "measured": 32.0,
+     "diff": 2.78
+    },
+    {
+     "metric": "RP",
+     "reported": 24.79,
+     "measured": 27.66,
+     "diff": 2.87
+    },
+    {
+     "metric": "NDCGexp@10%",
+     "reported": 18.25,
+     "measured": 18.59,
+     "diff": 0.34
+    },
+    {
+     "metric": "MRR@10",
+     "reported": 12.41,
+     "measured": 11.0,
+     "diff": -1.41
+    },
+    {
+     "metric": "MAP",
+     "reported": 28.77,
+     "measured": 31.06,
+     "diff": 2.29
+    }
+   ],
+   "max_abs_diff": 2.87,
+   "worst_signed": 2.87,
+   "direction": null,
+   "verdict": "pass",
+   "note": ""
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "ernie",
+   "name": "ERNIE",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@5",
+     "reported": 6.49,
+     "measured": 10.51,
+     "diff": 4.02
+    },
+    {
+     "metric": "R@20",
+     "reported": 22.58,
+     "measured": 29.87,
+     "diff": 7.29
+    },
+    {
+     "metric": "RP",
+     "reported": 20.18,
+     "measured": 24.2,
+     "diff": 4.02
+    },
+    {
+     "metric": "NDCGexp@10%",
+     "reported": 9.66,
+     "measured": 14.25,
+     "diff": 4.59
+    },
+    {
+     "metric": "MRR@10",
+     "reported": 3.77,
+     "measured": 9.0,
+     "diff": 5.23
+    },
+    {
+     "metric": "MAP",
+     "reported": 22.71,
+     "measured": 28.19,
+     "diff": 5.48
+    }
+   ],
+   "max_abs_diff": 7.29,
+   "worst_signed": 7.29,
+   "direction": "higher",
+   "verdict": "outside",
+   "note": ""
+  },
+  {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "key": "scibert",
+   "name": "SciBERT",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@5",
+     "reported": 5.13,
+     "measured": 8.96,
+     "diff": 3.83
+    },
+    {
+     "metric": "R@20",
+     "reported": 17.99,
+     "measured": 31.04,
+     "diff": 13.05
+    },
+    {
+     "metric": "RP",
+     "reported": 17.13,
+     "measured": 24.76,
+     "diff": 7.63
+    },
+    {
+     "metric": "NDCGexp@10%",
+     "reported": 7.5,
+     "measured": 14.6,
+     "diff": 7.1
+    },
+    {
+     "metric": "MRR@10",
+     "reported": 3.41,
+     "measured": 7.5,
+     "diff": 4.09
+    },
+    {
+     "metric": "MAP",
+     "reported": 20.34,
+     "measured": 27.53,
+     "diff": 7.19
+    }
+   ],
+   "max_abs_diff": 13.05,
+   "worst_signed": 13.05,
+   "direction": "higher",
+   "verdict": "outside",
+   "note": ""
+  },
+  {
+   "arch": "A3",
+   "dataset": "irpapers",
+   "key": "hybrid-text",
+   "name": "Hybrid text (BM25 + Arctic, RSF)",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@1",
+     "reported": 46,
+     "measured": 46.93,
+     "diff": 0.93
+    },
+    {
+     "metric": "R@5",
+     "reported": 78,
+     "measured": 82.12,
+     "diff": 4.12
+    },
+    {
+     "metric": "R@20",
+     "reported": 91,
+     "measured": 92.18,
+     "diff": 1.18
+    }
+   ],
+   "max_abs_diff": 4.12,
+   "worst_signed": 4.12,
+   "direction": "higher",
+   "verdict": "outside",
+   "note": ""
+  },
+  {
+   "arch": "A3",
+   "dataset": "irpapers",
+   "key": "colmodernvbert",
+   "name": "ColModernVBERT",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@1",
+     "reported": 43,
+     "measured": 43.58,
+     "diff": 0.58
+    },
+    {
+     "metric": "R@5",
+     "reported": 78,
+     "measured": 77.65,
+     "diff": -0.35
+    },
+    {
+     "metric": "R@20",
+     "reported": 93,
+     "measured": 92.74,
+     "diff": -0.26
+    }
+   ],
+   "max_abs_diff": 0.58,
+   "worst_signed": 0.58,
+   "direction": null,
+   "verdict": "pass",
+   "note": ""
+  },
+  {
+   "arch": "A3",
+   "dataset": "irpapers",
+   "key": "colpali",
+   "name": "ColPali",
+   "tier": "kaggle",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@1",
+     "reported": 45,
+     "measured": 47.49,
+     "diff": 2.49
+    },
+    {
+     "metric": "R@5",
+     "reported": 79,
+     "measured": 75.98,
+     "diff": -3.02
+    },
+    {
+     "metric": "R@20",
+     "reported": 93,
+     "measured": 92.18,
+     "diff": -0.82
+    }
+   ],
+   "max_abs_diff": 3.02,
+   "worst_signed": -3.02,
+   "direction": "lower",
+   "verdict": "outside",
+   "note": "Run on Kaggle (2x T4); per-query recalls copied from the Kaggle output (query order verified against the local BM25 run)."
+  },
+  {
+   "arch": "A3",
+   "dataset": "irpapers",
+   "key": "colqwen2",
+   "name": "ColQwen2",
+   "tier": "kaggle",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@1",
+     "reported": 49,
+     "measured": 49.72,
+     "diff": 0.72
+    },
+    {
+     "metric": "R@5",
+     "reported": 81,
+     "measured": 81.01,
+     "diff": 0.01
+    },
+    {
+     "metric": "R@20",
+     "reported": 94,
+     "measured": 94.41,
+     "diff": 0.41
+    }
+   ],
+   "max_abs_diff": 0.72,
+   "worst_signed": 0.72,
+   "direction": null,
+   "verdict": "pass",
+   "note": "Run on Kaggle (2x T4); per-query recalls copied from the Kaggle output (query order verified against the local BM25 run)."
+  },
+  {
+   "arch": "A3",
+   "dataset": "irpapers",
+   "key": "mm-hybrid",
+   "name": "Multimodal hybrid (text hybrid + ColModernVBERT)",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@1",
+     "reported": 49,
+     "measured": 51.4,
+     "diff": 2.4
+    },
+    {
+     "metric": "R@5",
+     "reported": 81,
+     "measured": 85.47,
+     "diff": 4.47
+    },
+    {
+     "metric": "R@20",
+     "reported": 95,
+     "measured": 95.53,
+     "diff": 0.53
+    }
+   ],
+   "max_abs_diff": 4.47,
+   "worst_signed": 4.47,
+   "direction": "higher",
+   "verdict": "outside",
+   "note": ""
+  },
+  {
+   "arch": "A3",
+   "dataset": "irpapers",
+   "key": "muvera",
+   "name": "MUVERA (ColModernVBERT FDE, ef=1024)",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "R@1",
+     "reported": 41,
+     "measured": 39.11,
+     "diff": -1.89
+    },
+    {
+     "metric": "R@5",
+     "reported": 75,
+     "measured": 70.39,
+     "diff": -4.61
+    },
+    {
+     "metric": "R@20",
+     "reported": 88,
+     "measured": 80.45,
+     "diff": -7.55
+    }
+   ],
+   "max_abs_diff": 7.55,
+   "worst_signed": -7.55,
+   "direction": "lower",
+   "verdict": "outside",
+   "note": ""
+  },
+  {
+   "arch": "A3",
+   "dataset": "irpapers",
+   "key": "voyage-3-large",
+   "name": "Voyage 3 Large",
+   "tier": "api",
+   "status": "not_run"
+  },
+  {
+   "arch": "A3",
+   "dataset": "irpapers",
+   "key": "cohere-embed-v4",
+   "name": "Cohere Embed v4",
+   "tier": "api",
+   "status": "not_run"
+  },
+  {
+   "arch": "A4",
+   "dataset": "maple",
+   "key": "bm25",
+   "name": "BM25",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "AllAspect@5",
+     "reported": 0.0,
+     "measured": 0.0,
+     "diff": 0.0
+    },
+    {
+     "metric": "AllAspect@20",
+     "reported": 0.0,
+     "measured": 0.0,
+     "diff": 0.0
+    },
+    {
+     "metric": "AnyAspect@5",
+     "reported": 68.6,
+     "measured": 68.1,
+     "diff": -0.5
+    },
+    {
+     "metric": "AnyAspect@20",
+     "reported": 89.0,
+     "measured": 87.62,
+     "diff": -1.38
+    },
+    {
+     "metric": "AspectCoverage@5",
+     "reported": 15.4,
+     "measured": 15.03,
+     "diff": -0.37
+    },
+    {
+     "metric": "AspectCoverage@20",
+     "reported": 28.3,
+     "measured": 27.95,
+     "diff": -0.35
+    }
+   ],
+   "max_abs_diff": 1.38,
+   "worst_signed": -1.38,
+   "direction": null,
+   "verdict": "pass",
+   "note": ""
+  },
+  {
+   "arch": "A4",
+   "dataset": "maple",
+   "key": "specter2-maple",
+   "name": "SPECTER2",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "AllAspect@5",
+     "reported": 0.0,
+     "measured": 0.0,
+     "diff": 0.0
+    },
+    {
+     "metric": "AllAspect@20",
+     "reported": 1.4,
+     "measured": 0.95,
+     "diff": -0.45
+    },
+    {
+     "metric": "AnyAspect@5",
+     "reported": 38.1,
+     "measured": 69.05,
+     "diff": 30.95
+    },
+    {
+     "metric": "AnyAspect@20",
+     "reported": 55.2,
+     "measured": 85.24,
+     "diff": 30.04
+    },
+    {
+     "metric": "AspectCoverage@5",
+     "reported": 12.3,
+     "measured": 21.02,
+     "diff": 8.72
+    },
+    {
+     "metric": "AspectCoverage@20",
+     "reported": 22.5,
+     "measured": 39.1,
+     "diff": 16.6
+    }
+   ],
+   "max_abs_diff": 30.95,
+   "worst_signed": 30.95,
+   "direction": "higher",
+   "verdict": "outside",
+   "note": ""
+  },
+  {
+   "arch": "A4",
+   "dataset": "maple",
+   "key": "scincl",
+   "name": "SciNCL",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "AllAspect@5",
+     "reported": 0.5,
+     "measured": 0.0,
+     "diff": -0.5
+    },
+    {
+     "metric": "AllAspect@20",
+     "reported": 1.4,
+     "measured": 2.38,
+     "diff": 0.98
+    },
+    {
+     "metric": "AnyAspect@5",
+     "reported": 63.3,
+     "measured": 60.48,
+     "diff": -2.82
+    },
+    {
+     "metric": "AnyAspect@20",
+     "reported": 75.7,
+     "measured": 77.62,
+     "diff": 1.92
+    },
+    {
+     "metric": "AspectCoverage@5",
+     "reported": 17.8,
+     "measured": 16.55,
+     "diff": -1.25
+    },
+    {
+     "metric": "AspectCoverage@20",
+     "reported": 30.7,
+     "measured": 33.46,
+     "diff": 2.76
+    }
+   ],
+   "max_abs_diff": 2.82,
+   "worst_signed": -2.82,
+   "direction": null,
+   "verdict": "pass",
+   "note": ""
+  },
+  {
+   "arch": "A4",
+   "dataset": "maple",
+   "key": "bge-m3",
+   "name": "BGE-M3",
+   "tier": "local",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "AllAspect@5",
+     "reported": 1.0,
+     "measured": 1.43,
+     "diff": 0.43
+    },
+    {
+     "metric": "AllAspect@20",
+     "reported": 2.9,
+     "measured": 3.33,
+     "diff": 0.43
+    },
+    {
+     "metric": "AnyAspect@5",
+     "reported": 64.3,
+     "measured": 62.38,
+     "diff": -1.92
+    },
+    {
+     "metric": "AnyAspect@20",
+     "reported": 80.0,
+     "measured": 78.1,
+     "diff": -1.9
+    },
+    {
+     "metric": "AspectCoverage@5",
+     "reported": 21.9,
+     "measured": 19.29,
+     "diff": -2.61
+    },
+    {
+     "metric": "AspectCoverage@20",
+     "reported": 33.3,
+     "measured": 32.63,
+     "diff": -0.67
+    }
+   ],
+   "max_abs_diff": 2.61,
+   "worst_signed": -2.61,
+   "direction": null,
+   "verdict": "pass",
+   "note": ""
+  },
+  {
+   "arch": "A4",
+   "dataset": "maple",
+   "key": "instructor-xl-maple",
+   "name": "Instructor-XL",
+   "tier": "kaggle",
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "AllAspect@5",
+     "reported": 0.0,
+     "measured": 0.48,
+     "diff": 0.48
+    },
+    {
+     "metric": "AllAspect@20",
+     "reported": 2.9,
+     "measured": 2.86,
+     "diff": -0.04
+    },
+    {
+     "metric": "AnyAspect@5",
+     "reported": 68.1,
+     "measured": 71.43,
+     "diff": 3.33
+    },
+    {
+     "metric": "AnyAspect@20",
+     "reported": 80.5,
+     "measured": 90.48,
+     "diff": 9.98
+    },
+    {
+     "metric": "AspectCoverage@5",
+     "reported": 21.0,
+     "measured": 23.09,
+     "diff": 2.09
+    },
+    {
+     "metric": "AspectCoverage@20",
+     "reported": 34.1,
+     "measured": 39.78,
+     "diff": 5.68
+    }
+   ],
+   "max_abs_diff": 9.98,
+   "worst_signed": 9.98,
+   "direction": "higher",
+   "verdict": "outside",
+   "note": "Run on Kaggle (2x T4); per-query recalls kept in Kaggle output."
+  },
+  {
+   "arch": "A4",
+   "dataset": "maple",
+   "key": "qwen3-embed-8b",
+   "name": "Qwen3-Embed-8B",
+   "tier": "kaggle",
+   "status": "pending"
+  },
+  {
+   "arch": "A4",
+   "dataset": "maple",
+   "key": "gritlm-7b-maple",
+   "name": "GritLM-7B",
+   "tier": "kaggle",
+   "status": "pending"
+  },
+  {
+   "arch": "A4",
+   "dataset": "maple",
+   "key": "qwen3-vl-embed-8b",
+   "name": "Qwen3-VL-Embed-8B",
+   "tier": "external",
+   "status": "not_run"
+  },
+  {
+   "arch": "A4",
+   "dataset": "maple",
+   "key": "ops-mm-embed-7b",
+   "name": "Ops-MM-Embed-7B",
+   "tier": "external",
+   "status": "not_run"
+  }
+ ],
+ "cells": {
+  "A1__litsearch": {
+   "arch": "A1",
+   "dataset": "litsearch",
+   "native": true,
+   "models": [
+    {
+     "key": "gritlm-7b-litsearch",
+     "name": "GritLM-7B",
+     "r10": 75.22,
+     "se": 1.74,
+     "has_pq": true
+    },
+    {
+     "key": "e5-large-v2",
+     "name": "E5-large-v2",
+     "r10": 57.27,
+     "se": 2.09,
+     "has_pq": true
+    },
+    {
+     "key": "instructor-xl-litsearch",
+     "name": "Instructor-XL",
+     "r10": 56.88,
+     "se": 2.02,
+     "has_pq": true
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 53.72,
+     "se": 2.11,
+     "has_pq": true
+    },
+    {
+     "key": "gtr-t5-large",
+     "name": "GTR-T5-large",
+     "r10": 43.23,
+     "se": 2.07,
+     "has_pq": true
+    }
+   ],
+   "bm25": 53.72,
+   "best": {
+    "key": "gritlm-7b-litsearch",
+    "name": "GritLM-7B",
+    "r10": 75.22,
+    "se": 1.74,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 21.5,
+   "pending": []
+  },
+  "A1__doris_mae": {
+   "arch": "A1",
+   "dataset": "doris_mae",
+   "native": false,
+   "models": [
+    {
+     "key": "instructor-xl-litsearch",
+     "name": "Instructor-XL",
+     "r10": 14.33,
+     "se": 2.02,
+     "has_pq": true
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 13.71,
+     "se": 1.89,
+     "has_pq": true
+    },
+    {
+     "key": "gtr-t5-large",
+     "name": "GTR-T5-large",
+     "r10": 11.74,
+     "se": 1.81,
+     "has_pq": true
+    },
+    {
+     "key": "e5-large-v2",
+     "name": "E5-large-v2",
+     "r10": 10.1,
+     "se": 1.52,
+     "has_pq": true
+    }
+   ],
+   "bm25": 13.71,
+   "best": {
+    "key": "instructor-xl-litsearch",
+    "name": "Instructor-XL",
+    "r10": 14.33,
+    "se": 2.02,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 0.62,
+   "pending": []
+  },
+  "A1__irpapers": {
+   "arch": "A1",
+   "dataset": "irpapers",
+   "native": false,
+   "models": [
+    {
+     "key": "gritlm-7b-litsearch",
+     "name": "GritLM-7B",
+     "r10": 97.21,
+     "se": 1.21,
+     "has_pq": true
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 92.74,
+     "se": 1.92,
+     "has_pq": true
+    },
+    {
+     "key": "gtr-t5-large",
+     "name": "GTR-T5-large",
+     "r10": 92.74,
+     "se": 1.91,
+     "has_pq": true
+    },
+    {
+     "key": "e5-large-v2",
+     "name": "E5-large-v2",
+     "r10": 92.74,
+     "se": 1.9,
+     "has_pq": true
+    },
+    {
+     "key": "instructor-xl-litsearch",
+     "name": "Instructor-XL",
+     "r10": 84.36,
+     "se": 2.64,
+     "has_pq": true
+    }
+   ],
+   "bm25": 92.74,
+   "best": {
+    "key": "gritlm-7b-litsearch",
+    "name": "GritLM-7B",
+    "r10": 97.21,
+    "se": 1.21,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 4.47,
+   "pending": []
+  },
+  "A1__maple": {
+   "arch": "A1",
+   "dataset": "maple",
+   "native": false,
+   "models": [
+    {
+     "key": "gritlm-7b-litsearch",
+     "name": "GritLM-7B",
+     "r10": 60.95,
+     "se": 1.03,
+     "has_pq": false
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 39.19,
+     "se": 1.06,
+     "has_pq": true
+    },
+    {
+     "key": "instructor-xl-litsearch",
+     "name": "Instructor-XL",
+     "r10": 29.98,
+     "se": 0.98,
+     "has_pq": false
+    },
+    {
+     "key": "e5-large-v2",
+     "name": "E5-large-v2",
+     "r10": 27.3,
+     "se": 0.92,
+     "has_pq": true
+    },
+    {
+     "key": "gtr-t5-large",
+     "name": "GTR-T5-large",
+     "r10": 14.42,
+     "se": 0.77,
+     "has_pq": true
+    }
+   ],
+   "bm25": 39.19,
+   "best": {
+    "key": "gritlm-7b-litsearch",
+    "name": "GritLM-7B",
+    "r10": 60.95,
+    "se": 1.03,
+    "has_pq": false
+   },
+   "best_gain_over_bm25": 21.76,
+   "pending": []
+  },
+  "A2__litsearch": {
+   "arch": "A2",
+   "dataset": "litsearch",
+   "native": false,
+   "models": [
+    {
+     "key": "e5-large-v2-doris",
+     "name": "E5-L-v2",
+     "r10": 61.93,
+     "se": 2.02,
+     "has_pq": true
+    },
+    {
+     "key": "specter-v2",
+     "name": "SPECTER-v2",
+     "r10": 52.52,
+     "se": 2.01,
+     "has_pq": true
+    },
+    {
+     "key": "colbert-v2",
+     "name": "ColBERT-v2",
+     "r10": 52.46,
+     "se": 2.03,
+     "has_pq": true
+    },
+    {
+     "key": "splade-v2",
+     "name": "SPLADE-v2",
+     "r10": 51.56,
+     "se": 2.09,
+     "has_pq": true
+    },
+    {
+     "key": "sentbert",
+     "name": "SentBERT",
+     "r10": 49.64,
+     "se": 2.06,
+     "has_pq": true
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 49.54,
+     "se": 2.11,
+     "has_pq": true
+    },
+    {
+     "key": "tfidf",
+     "name": "TF-IDF",
+     "r10": 39.82,
+     "se": 1.95,
+     "has_pq": true
+    },
+    {
+     "key": "ance-firstp",
+     "name": "ANCE-FirstP",
+     "r10": 36.99,
+     "se": 1.97,
+     "has_pq": true
+    },
+    {
+     "key": "simlm",
+     "name": "SimLM",
+     "r10": 36.71,
+     "se": 1.97,
+     "has_pq": true
+    },
+    {
+     "key": "simcse",
+     "name": "SimCSE",
+     "r10": 28.34,
+     "se": 1.79,
+     "has_pq": true
+    },
+    {
+     "key": "scibert",
+     "name": "SciBERT",
+     "r10": 18.9,
+     "se": 1.62,
+     "has_pq": true
+    },
+    {
+     "key": "llama-7b",
+     "name": "LLAMA",
+     "r10": 16.08,
+     "se": 1.47,
+     "has_pq": true
+    },
+    {
+     "key": "ernie",
+     "name": "ERNIE",
+     "r10": 14.46,
+     "se": 1.45,
+     "has_pq": true
+    }
+   ],
+   "bm25": 49.54,
+   "best": {
+    "key": "e5-large-v2-doris",
+    "name": "E5-L-v2",
+    "r10": 61.93,
+    "se": 2.02,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 12.39,
+   "pending": []
+  },
+  "A2__doris_mae": {
+   "arch": "A2",
+   "dataset": "doris_mae",
+   "native": true,
+   "models": [
+    {
+     "key": "e5-large-v2-doris",
+     "name": "E5-L-v2",
+     "r10": 26.92,
+     "se": 2.24,
+     "has_pq": true
+    },
+    {
+     "key": "specter-v2",
+     "name": "SPECTER-v2",
+     "r10": 26.55,
+     "se": 2.41,
+     "has_pq": true
+    },
+    {
+     "key": "splade-v2",
+     "name": "SPLADE-v2",
+     "r10": 25.74,
+     "se": 2.13,
+     "has_pq": true
+    },
+    {
+     "key": "sentbert",
+     "name": "SentBERT",
+     "r10": 25.05,
+     "se": 2.41,
+     "has_pq": true
+    },
+    {
+     "key": "colbert-v2",
+     "name": "ColBERT-v2",
+     "r10": 24.66,
+     "se": 1.69,
+     "has_pq": true
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 24.19,
+     "se": 2.04,
+     "has_pq": true
+    },
+    {
+     "key": "simcse",
+     "name": "SimCSE",
+     "r10": 22.64,
+     "se": 2.04,
+     "has_pq": true
+    },
+    {
+     "key": "tfidf",
+     "name": "TF-IDF",
+     "r10": 20.83,
+     "se": 2.2,
+     "has_pq": true
+    },
+    {
+     "key": "simlm",
+     "name": "SimLM",
+     "r10": 20.49,
+     "se": 2.12,
+     "has_pq": true
+    },
+    {
+     "key": "llama-7b",
+     "name": "LLAMA",
+     "r10": 20.03,
+     "se": 2.03,
+     "has_pq": true
+    },
+    {
+     "key": "ance-firstp",
+     "name": "ANCE-FirstP",
+     "r10": 18.83,
+     "se": 1.84,
+     "has_pq": true
+    },
+    {
+     "key": "scibert",
+     "name": "SciBERT",
+     "r10": 18.05,
+     "se": 1.98,
+     "has_pq": true
+    },
+    {
+     "key": "ernie",
+     "name": "ERNIE",
+     "r10": 17.21,
+     "se": 1.75,
+     "has_pq": true
+    }
+   ],
+   "bm25": 24.19,
+   "best": {
+    "key": "e5-large-v2-doris",
+    "name": "E5-L-v2",
+    "r10": 26.92,
+    "se": 2.24,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 2.73,
+   "pending": []
+  },
+  "A2__irpapers": {
+   "arch": "A2",
+   "dataset": "irpapers",
+   "native": false,
+   "models": [
+    {
+     "key": "tfidf",
+     "name": "TF-IDF",
+     "r10": 97.21,
+     "se": 1.2,
+     "has_pq": true
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 92.18,
+     "se": 1.98,
+     "has_pq": true
+    },
+    {
+     "key": "e5-large-v2-doris",
+     "name": "E5-L-v2",
+     "r10": 91.06,
+     "se": 2.13,
+     "has_pq": true
+    },
+    {
+     "key": "splade-v2",
+     "name": "SPLADE-v2",
+     "r10": 83.24,
+     "se": 2.76,
+     "has_pq": true
+    },
+    {
+     "key": "sentbert",
+     "name": "SentBERT",
+     "r10": 83.24,
+     "se": 2.72,
+     "has_pq": true
+    },
+    {
+     "key": "ance-firstp",
+     "name": "ANCE-FirstP",
+     "r10": 72.07,
+     "se": 3.33,
+     "has_pq": true
+    },
+    {
+     "key": "colbert-v2",
+     "name": "ColBERT-v2",
+     "r10": 64.8,
+     "se": 3.56,
+     "has_pq": true
+    },
+    {
+     "key": "simlm",
+     "name": "SimLM",
+     "r10": 57.54,
+     "se": 3.59,
+     "has_pq": true
+    },
+    {
+     "key": "specter-v2",
+     "name": "SPECTER-v2",
+     "r10": 51.4,
+     "se": 3.85,
+     "has_pq": true
+    },
+    {
+     "key": "simcse",
+     "name": "SimCSE",
+     "r10": 48.6,
+     "se": 3.79,
+     "has_pq": true
+    },
+    {
+     "key": "llama-7b",
+     "name": "LLAMA",
+     "r10": 21.23,
+     "se": 3.05,
+     "has_pq": true
+    },
+    {
+     "key": "scibert",
+     "name": "SciBERT",
+     "r10": 11.73,
+     "se": 2.39,
+     "has_pq": true
+    },
+    {
+     "key": "ernie",
+     "name": "ERNIE",
+     "r10": 7.26,
+     "se": 1.91,
+     "has_pq": true
+    }
+   ],
+   "bm25": 92.18,
+   "best": {
+    "key": "tfidf",
+    "name": "TF-IDF",
+    "r10": 97.21,
+    "se": 1.2,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 5.03,
+   "pending": []
+  },
+  "A2__maple": {
+   "arch": "A2",
+   "dataset": "maple",
+   "native": false,
+   "models": [
+    {
+     "key": "specter-v2",
+     "name": "SPECTER-v2",
+     "r10": 39.43,
+     "se": 1.05,
+     "has_pq": true
+    },
+    {
+     "key": "e5-large-v2-doris",
+     "name": "E5-L-v2",
+     "r10": 38.71,
+     "se": 1.07,
+     "has_pq": true
+    },
+    {
+     "key": "splade-v2",
+     "name": "SPLADE-v2",
+     "r10": 37.23,
+     "se": 1.03,
+     "has_pq": true
+    },
+    {
+     "key": "sentbert",
+     "name": "SentBERT",
+     "r10": 37.04,
+     "se": 1.03,
+     "has_pq": true
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 35.23,
+     "se": 1.02,
+     "has_pq": true
+    },
+    {
+     "key": "colbert-v2",
+     "name": "ColBERT-v2",
+     "r10": 35.08,
+     "se": 1.03,
+     "has_pq": true
+    },
+    {
+     "key": "tfidf",
+     "name": "TF-IDF",
+     "r10": 26.11,
+     "se": 0.94,
+     "has_pq": true
+    },
+    {
+     "key": "ance-firstp",
+     "name": "ANCE-FirstP",
+     "r10": 25.63,
+     "se": 0.96,
+     "has_pq": true
+    },
+    {
+     "key": "simlm",
+     "name": "SimLM",
+     "r10": 22.48,
+     "se": 0.89,
+     "has_pq": true
+    },
+    {
+     "key": "llama-7b",
+     "name": "LLAMA",
+     "r10": 18.19,
+     "se": 0.81,
+     "has_pq": false
+    },
+    {
+     "key": "simcse",
+     "name": "SimCSE",
+     "r10": 18.04,
+     "se": 0.88,
+     "has_pq": true
+    },
+    {
+     "key": "ernie",
+     "name": "ERNIE",
+     "r10": 17.09,
+     "se": 0.82,
+     "has_pq": true
+    },
+    {
+     "key": "scibert",
+     "name": "SciBERT",
+     "r10": 16.42,
+     "se": 0.81,
+     "has_pq": true
+    }
+   ],
+   "bm25": 35.23,
+   "best": {
+    "key": "specter-v2",
+    "name": "SPECTER-v2",
+    "r10": 39.43,
+    "se": 1.05,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 4.2,
+   "pending": []
+  },
+  "A3__litsearch": {
+   "arch": "A3",
+   "dataset": "litsearch",
+   "native": false,
+   "models": [
+    {
+     "key": "hybrid-text",
+     "name": "Hybrid text (BM25 + Arctic, RSF)",
+     "r10": 68.01,
+     "se": 1.93,
+     "has_pq": true
+    },
+    {
+     "key": "arctic-embed-2",
+     "name": "Arctic-embed 2.0",
+     "r10": 61.76,
+     "se": 2.0,
+     "has_pq": true
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 53.86,
+     "se": 2.06,
+     "has_pq": true
+    }
+   ],
+   "bm25": 53.86,
+   "best": {
+    "key": "hybrid-text",
+    "name": "Hybrid text (BM25 + Arctic, RSF)",
+    "r10": 68.01,
+    "se": 1.93,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 14.15,
+   "pending": []
+  },
+  "A3__doris_mae": {
+   "arch": "A3",
+   "dataset": "doris_mae",
+   "native": false,
+   "models": [
+    {
+     "key": "hybrid-text",
+     "name": "Hybrid text (BM25 + Arctic, RSF)",
+     "r10": 19.46,
+     "se": 2.23,
+     "has_pq": true
+    },
+    {
+     "key": "arctic-embed-2",
+     "name": "Arctic-embed 2.0",
+     "r10": 16.44,
+     "se": 2.19,
+     "has_pq": true
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 14.31,
+     "se": 1.88,
+     "has_pq": true
+    }
+   ],
+   "bm25": 14.31,
+   "best": {
+    "key": "hybrid-text",
+    "name": "Hybrid text (BM25 + Arctic, RSF)",
+    "r10": 19.46,
+    "se": 2.23,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 5.15,
+   "pending": []
+  },
+  "A3__irpapers": {
+   "arch": "A3",
+   "dataset": "irpapers",
+   "native": true,
+   "models": [
+    {
+     "key": "mm-hybrid",
+     "name": "Multimodal hybrid (text hybrid + ColModernVBERT)",
+     "r10": 91.62,
+     "se": 2.07,
+     "has_pq": true
+    },
+    {
+     "key": "hybrid-text",
+     "name": "Hybrid text (BM25 + Arctic, RSF)",
+     "r10": 90.5,
+     "se": 2.15,
+     "has_pq": true
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 88.27,
+     "se": 2.34,
+     "has_pq": true
+    },
+    {
+     "key": "colmodernvbert",
+     "name": "ColModernVBERT",
+     "r10": 87.15,
+     "se": 2.51,
+     "has_pq": true
+    },
+    {
+     "key": "colqwen2",
+     "name": "ColQwen2",
+     "r10": 87.15,
+     "se": 2.5,
+     "has_pq": true
+    },
+    {
+     "key": "colpali",
+     "name": "ColPali",
+     "r10": 86.59,
+     "se": 2.7,
+     "has_pq": true
+    },
+    {
+     "key": "arctic-embed-2",
+     "name": "Arctic-embed 2.0",
+     "r10": 80.45,
+     "se": 3.03,
+     "has_pq": true
+    },
+    {
+     "key": "muvera",
+     "name": "MUVERA (ColModernVBERT FDE, ef=1024)",
+     "r10": 77.09,
+     "se": 3.11,
+     "has_pq": true
+    }
+   ],
+   "bm25": 88.27,
+   "best": {
+    "key": "mm-hybrid",
+    "name": "Multimodal hybrid (text hybrid + ColModernVBERT)",
+    "r10": 91.62,
+    "se": 2.07,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 3.35,
+   "pending": []
+  },
+  "A3__maple": {
+   "arch": "A3",
+   "dataset": "maple",
+   "native": false,
+   "models": [
+    {
+     "key": "hybrid-text",
+     "name": "Hybrid text (BM25 + Arctic, RSF)",
+     "r10": 40.48,
+     "se": 1.08,
+     "has_pq": true
+    },
+    {
+     "key": "arctic-embed-2",
+     "name": "Arctic-embed 2.0",
+     "r10": 32.51,
+     "se": 1.04,
+     "has_pq": true
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 31.6,
+     "se": 1.02,
+     "has_pq": true
+    }
+   ],
+   "bm25": 31.6,
+   "best": {
+    "key": "hybrid-text",
+    "name": "Hybrid text (BM25 + Arctic, RSF)",
+    "r10": 40.48,
+    "se": 1.08,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 8.88,
+   "pending": []
+  },
+  "A4__litsearch": {
+   "arch": "A4",
+   "dataset": "litsearch",
+   "native": false,
+   "models": [
+    {
+     "key": "qwen3-embed-8b",
+     "name": "Qwen3-Embed-8B",
+     "r10": 73.08,
+     "se": 1.79,
+     "has_pq": true
+    },
+    {
+     "key": "gritlm-7b-maple",
+     "name": "GritLM-7B",
+     "r10": 70.74,
+     "se": 1.83,
+     "has_pq": true
+    },
+    {
+     "key": "instructor-xl-maple",
+     "name": "Instructor-XL",
+     "r10": 54.77,
+     "se": 2.01,
+     "has_pq": true
+    },
+    {
+     "key": "bge-m3",
+     "name": "BGE-M3",
+     "r10": 51.02,
+     "se": 1.94,
+     "has_pq": true
+    },
+    {
+     "key": "specter2-maple",
+     "name": "SPECTER2",
+     "r10": 50.08,
+     "se": 2.02,
+     "has_pq": true
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 43.51,
+     "se": 1.85,
+     "has_pq": true
+    },
+    {
+     "key": "scincl",
+     "name": "SciNCL",
+     "r10": 36.93,
+     "se": 1.93,
+     "has_pq": true
+    }
+   ],
+   "bm25": 43.51,
+   "best": {
+    "key": "qwen3-embed-8b",
+    "name": "Qwen3-Embed-8B",
+    "r10": 73.08,
+    "se": 1.79,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 29.57,
+   "pending": []
+  },
+  "A4__doris_mae": {
+   "arch": "A4",
+   "dataset": "doris_mae",
+   "native": false,
+   "models": [
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 5.1,
+     "se": 0.24,
+     "has_pq": true
+    },
+    {
+     "key": "instructor-xl-maple",
+     "name": "Instructor-XL",
+     "r10": 5.01,
+     "se": 0.25,
+     "has_pq": false
+    },
+    {
+     "key": "bge-m3",
+     "name": "BGE-M3",
+     "r10": 4.17,
+     "se": 0.23,
+     "has_pq": true
+    },
+    {
+     "key": "specter2-maple",
+     "name": "SPECTER2",
+     "r10": 3.05,
+     "se": 0.19,
+     "has_pq": true
+    },
+    {
+     "key": "scincl",
+     "name": "SciNCL",
+     "r10": 2.98,
+     "se": 0.18,
+     "has_pq": true
+    }
+   ],
+   "bm25": 5.1,
+   "best": {
+    "key": "bm25",
+    "name": "BM25",
+    "r10": 5.1,
+    "se": 0.24,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 0.0,
+   "pending": []
+  },
+  "A4__irpapers": {
+   "arch": "A4",
+   "dataset": "irpapers",
+   "native": false,
+   "models": [
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 98.32,
+     "se": 0.93,
+     "has_pq": true
+    },
+    {
+     "key": "gritlm-7b-maple",
+     "name": "GritLM-7B",
+     "r10": 97.21,
+     "se": 1.22,
+     "has_pq": true
+    },
+    {
+     "key": "qwen3-embed-8b",
+     "name": "Qwen3-Embed-8B",
+     "r10": 96.09,
+     "se": 1.49,
+     "has_pq": true
+    },
+    {
+     "key": "bge-m3",
+     "name": "BGE-M3",
+     "r10": 94.41,
+     "se": 1.7,
+     "has_pq": true
+    },
+    {
+     "key": "instructor-xl-maple",
+     "name": "Instructor-XL",
+     "r10": 84.36,
+     "se": 2.68,
+     "has_pq": true
+    },
+    {
+     "key": "specter2-maple",
+     "name": "SPECTER2",
+     "r10": 56.98,
+     "se": 3.74,
+     "has_pq": true
+    },
+    {
+     "key": "scincl",
+     "name": "SciNCL",
+     "r10": 49.16,
+     "se": 3.72,
+     "has_pq": true
+    }
+   ],
+   "bm25": 98.32,
+   "best": {
+    "key": "bm25",
+    "name": "BM25",
+    "r10": 98.32,
+    "se": 0.93,
+    "has_pq": true
+   },
+   "best_gain_over_bm25": 0.0,
+   "pending": []
+  },
+  "A4__maple": {
+   "arch": "A4",
+   "dataset": "maple",
+   "native": true,
+   "models": [
+    {
+     "key": "instructor-xl-maple",
+     "name": "Instructor-XL",
+     "r10": 30.55,
+     "se": 1.02,
+     "has_pq": false
+    },
+    {
+     "key": "specter2-maple",
+     "name": "SPECTER2",
+     "r10": 28.74,
+     "se": 0.96,
+     "has_pq": true
+    },
+    {
+     "key": "bge-m3",
+     "name": "BGE-M3",
+     "r10": 24.63,
+     "se": 0.93,
+     "has_pq": true
+    },
+    {
+     "key": "scincl",
+     "name": "SciNCL",
+     "r10": 23.87,
+     "se": 0.93,
+     "has_pq": true
+    },
+    {
+     "key": "bm25",
+     "name": "BM25",
+     "r10": 21.19,
+     "se": 0.89,
+     "has_pq": true
+    }
+   ],
+   "bm25": 21.19,
+   "best": {
+    "key": "instructor-xl-maple",
+    "name": "Instructor-XL",
+    "r10": 30.55,
+    "se": 1.02,
+    "has_pq": false
+   },
+   "best_gain_over_bm25": 9.36,
+   "pending": [
+    "Qwen3-Embed-8B",
+    "GritLM-7B"
+   ]
+  }
+ },
+ "ranking": [
+  {
+   "arch": "A1",
+   "dataset": "doris_mae",
+   "n_models": 4,
+   "few_models": false,
+   "tau": 0.0,
+   "native_best": "E5-large-v2",
+   "foreign_best": "Instructor-XL",
+   "winner_kept": false,
+   "biggest_moves": [
+    {
+     "name": "E5-large-v2",
+     "native_rank": 1,
+     "rank": 4
+    },
+    {
+     "name": "Instructor-XL",
+     "native_rank": 2,
+     "rank": 1
+    },
+    {
+     "name": "BM25",
+     "native_rank": 3,
+     "rank": 2
+    }
+   ]
+  },
+  {
+   "arch": "A1",
+   "dataset": "irpapers",
+   "n_models": 5,
+   "few_models": false,
+   "tau": 0.359,
+   "native_best": "GritLM-7B",
+   "foreign_best": "GritLM-7B",
+   "winner_kept": true,
+   "biggest_moves": [
+    {
+     "name": "Instructor-XL",
+     "native_rank": 3,
+     "rank": 5
+    },
+    {
+     "name": "BM25",
+     "native_rank": 4,
+     "rank": 3
+    },
+    {
+     "name": "GTR-T5-large",
+     "native_rank": 5,
+     "rank": 4
+    }
+   ]
+  },
+  {
+   "arch": "A1",
+   "dataset": "maple",
+   "n_models": 5,
+   "few_models": false,
+   "tau": 0.4,
+   "native_best": "GritLM-7B",
+   "foreign_best": "GritLM-7B",
+   "winner_kept": true,
+   "biggest_moves": [
+    {
+     "name": "E5-large-v2",
+     "native_rank": 2,
+     "rank": 4
+    },
+    {
+     "name": "BM25",
+     "native_rank": 4,
+     "rank": 2
+    }
+   ]
+  },
+  {
+   "arch": "A2",
+   "dataset": "litsearch",
+   "n_models": 13,
+   "few_models": false,
+   "tau": 0.795,
+   "native_best": "E5-L-v2",
+   "foreign_best": "E5-L-v2",
+   "winner_kept": true,
+   "biggest_moves": [
+    {
+     "name": "SimCSE",
+     "native_rank": 7,
+     "rank": 10
+    },
+    {
+     "name": "ANCE-FirstP",
+     "native_rank": 11,
+     "rank": 8
+    },
+    {
+     "name": "ColBERT-v2",
+     "native_rank": 5,
+     "rank": 3
+    }
+   ]
+  },
+  {
+   "arch": "A2",
+   "dataset": "irpapers",
+   "n_models": 13,
+   "few_models": false,
+   "tau": 0.426,
+   "native_best": "E5-L-v2",
+   "foreign_best": "TF-IDF",
+   "winner_kept": false,
+   "biggest_moves": [
+    {
+     "name": "SPECTER-v2",
+     "native_rank": 2,
+     "rank": 9
+    },
+    {
+     "name": "TF-IDF",
+     "native_rank": 8,
+     "rank": 1
+    },
+    {
+     "name": "ANCE-FirstP",
+     "native_rank": 11,
+     "rank": 6
+    }
+   ]
+  },
+  {
+   "arch": "A2",
+   "dataset": "maple",
+   "n_models": 13,
+   "few_models": false,
+   "tau": 0.769,
+   "native_best": "E5-L-v2",
+   "foreign_best": "SPECTER-v2",
+   "winner_kept": false,
+   "biggest_moves": [
+    {
+     "name": "SimCSE",
+     "native_rank": 7,
+     "rank": 11
+    },
+    {
+     "name": "ANCE-FirstP",
+     "native_rank": 11,
+     "rank": 8
+    },
+    {
+     "name": "E5-L-v2",
+     "native_rank": 1,
+     "rank": 2
+    }
+   ]
+  },
+  {
+   "arch": "A3",
+   "dataset": "litsearch",
+   "n_models": 3,
+   "few_models": true,
+   "tau": 0.333,
+   "native_best": "Hybrid text (BM25 + Arctic, RSF)",
+   "foreign_best": "Hybrid text (BM25 + Arctic, RSF)",
+   "winner_kept": true,
+   "biggest_moves": [
+    {
+     "name": "BM25",
+     "native_rank": 2,
+     "rank": 3
+    },
+    {
+     "name": "Arctic-embed 2.0",
+     "native_rank": 3,
+     "rank": 2
+    }
+   ]
+  },
+  {
+   "arch": "A3",
+   "dataset": "doris_mae",
+   "n_models": 3,
+   "few_models": true,
+   "tau": 0.333,
+   "native_best": "Hybrid text (BM25 + Arctic, RSF)",
+   "foreign_best": "Hybrid text (BM25 + Arctic, RSF)",
+   "winner_kept": true,
+   "biggest_moves": [
+    {
+     "name": "BM25",
+     "native_rank": 2,
+     "rank": 3
+    },
+    {
+     "name": "Arctic-embed 2.0",
+     "native_rank": 3,
+     "rank": 2
+    }
+   ]
+  },
+  {
+   "arch": "A3",
+   "dataset": "maple",
+   "n_models": 3,
+   "few_models": true,
+   "tau": 0.333,
+   "native_best": "Hybrid text (BM25 + Arctic, RSF)",
+   "foreign_best": "Hybrid text (BM25 + Arctic, RSF)",
+   "winner_kept": true,
+   "biggest_moves": [
+    {
+     "name": "BM25",
+     "native_rank": 2,
+     "rank": 3
+    },
+    {
+     "name": "Arctic-embed 2.0",
+     "native_rank": 3,
+     "rank": 2
+    }
+   ]
+  },
+  {
+   "arch": "A4",
+   "dataset": "litsearch",
+   "n_models": 5,
+   "few_models": false,
+   "tau": 0.6,
+   "native_best": "Instructor-XL",
+   "foreign_best": "Instructor-XL",
+   "winner_kept": true,
+   "biggest_moves": [
+    {
+     "name": "SPECTER2",
+     "native_rank": 2,
+     "rank": 3
+    },
+    {
+     "name": "BGE-M3",
+     "native_rank": 3,
+     "rank": 2
+    },
+    {
+     "name": "SciNCL",
+     "native_rank": 4,
+     "rank": 5
+    }
+   ]
+  },
+  {
+   "arch": "A4",
+   "dataset": "doris_mae",
+   "n_models": 5,
+   "few_models": false,
+   "tau": 0.0,
+   "native_best": "Instructor-XL",
+   "foreign_best": "BM25",
+   "winner_kept": false,
+   "biggest_moves": [
+    {
+     "name": "BM25",
+     "native_rank": 5,
+     "rank": 1
+    },
+    {
+     "name": "SPECTER2",
+     "native_rank": 2,
+     "rank": 4
+    },
+    {
+     "name": "Instructor-XL",
+     "native_rank": 1,
+     "rank": 2
+    }
+   ]
+  },
+  {
+   "arch": "A4",
+   "dataset": "irpapers",
+   "n_models": 5,
+   "few_models": false,
+   "tau": -0.2,
+   "native_best": "Instructor-XL",
+   "foreign_best": "BM25",
+   "winner_kept": false,
+   "biggest_moves": [
+    {
+     "name": "BM25",
+     "native_rank": 5,
+     "rank": 1
+    },
+    {
+     "name": "Instructor-XL",
+     "native_rank": 1,
+     "rank": 3
+    },
+    {
+     "name": "SPECTER2",
+     "native_rank": 2,
+     "rank": 4
+    }
+   ]
+  }
+ ],
+ "format": [
+  {
+   "model": "BM25",
+   "dataset": "litsearch",
+   "by_arch": {
+    "A1": 53.72,
+    "A2": 49.54,
+    "A3": 53.86,
+    "A4": 43.51
+   },
+   "spread": 10.35
+  },
+  {
+   "model": "BM25",
+   "dataset": "doris_mae",
+   "by_arch": {
+    "A1": 13.71,
+    "A2": 24.19,
+    "A3": 14.31,
+    "A4": 5.1
+   },
+   "spread": 19.09
+  },
+  {
+   "model": "BM25",
+   "dataset": "irpapers",
+   "by_arch": {
+    "A1": 92.74,
+    "A2": 92.18,
+    "A3": 88.27,
+    "A4": 98.32
+   },
+   "spread": 10.05
+  },
+  {
+   "model": "BM25",
+   "dataset": "maple",
+   "by_arch": {
+    "A1": 39.19,
+    "A2": 35.23,
+    "A3": 31.6,
+    "A4": 21.19
+   },
+   "spread": 18.0
+  },
+  {
+   "model": "E5-large-v2",
+   "dataset": "litsearch",
+   "by_arch": {
+    "A1": 57.27,
+    "A2": 61.93
+   },
+   "spread": 4.66
+  },
+  {
+   "model": "E5-large-v2",
+   "dataset": "doris_mae",
+   "by_arch": {
+    "A1": 10.1,
+    "A2": 26.92
+   },
+   "spread": 16.82
+  },
+  {
+   "model": "E5-large-v2",
+   "dataset": "irpapers",
+   "by_arch": {
+    "A1": 92.74,
+    "A2": 91.06
+   },
+   "spread": 1.68
+  },
+  {
+   "model": "E5-large-v2",
+   "dataset": "maple",
+   "by_arch": {
+    "A1": 27.3,
+    "A2": 38.71
+   },
+   "spread": 11.41
+  },
+  {
+   "model": "Instructor-XL",
+   "dataset": "litsearch",
+   "by_arch": {
+    "A1": 56.88,
+    "A4": 54.77
+   },
+   "spread": 2.11
+  },
+  {
+   "model": "Instructor-XL",
+   "dataset": "doris_mae",
+   "by_arch": {
+    "A1": 14.33,
+    "A4": 5.01
+   },
+   "spread": 9.32
+  },
+  {
+   "model": "Instructor-XL",
+   "dataset": "irpapers",
+   "by_arch": {
+    "A1": 84.36,
+    "A4": 84.36
+   },
+   "spread": 0.0
+  },
+  {
+   "model": "Instructor-XL",
+   "dataset": "maple",
+   "by_arch": {
+    "A1": 29.98,
+    "A4": 30.55
+   },
+   "spread": 0.57
+  },
+  {
+   "model": "GritLM-7B",
+   "dataset": "litsearch",
+   "by_arch": {
+    "A1": 75.22,
+    "A4": 70.74
+   },
+   "spread": 4.48
+  },
+  {
+   "model": "GritLM-7B",
+   "dataset": "irpapers",
+   "by_arch": {
+    "A1": 97.21,
+    "A4": 97.21
+   },
+   "spread": 0.0
+  }
+ ],
+ "significance": {
+  "A1__litsearch": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "GritLM-7B",
+     "b": "E5-large-v2",
+     "diff": 17.95,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0003,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "E5-large-v2",
+     "b": "Instructor-XL",
+     "diff": 0.39,
+     "n": 597,
+     "p": 0.8398,
+     "p_holm": 0.8398,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "Instructor-XL",
+     "b": "BM25",
+     "diff": 3.16,
+     "n": 597,
+     "p": 0.1512,
+     "p_holm": 0.3024,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "BM25",
+     "b": "GTR-T5-large",
+     "diff": 10.49,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0003,
+     "significant": true
+    },
+    {
+     "kind": "best_vs_bm25",
+     "a": "GritLM-7B",
+     "b": "BM25",
+     "diff": 21.5,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0003,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "GritLM-7B",
+     "b": "Instructor-XL",
+     "diff": 18.34,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0003,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "GritLM-7B",
+     "b": "GTR-T5-large",
+     "diff": 31.99,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0003,
+     "significant": true
+    }
+   ],
+   "top_tier": [
+    "GritLM-7B"
+   ],
+   "top_tier_untested": [],
+   "untestable": []
+  },
+  "A1__doris_mae": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "Instructor-XL",
+     "b": "BM25",
+     "diff": 0.62,
+     "n": 91,
+     "p": 0.7421,
+     "p_holm": 0.8586,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "BM25",
+     "b": "GTR-T5-large",
+     "diff": 1.97,
+     "n": 91,
+     "p": 0.1243,
+     "p_holm": 0.3729,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "GTR-T5-large",
+     "b": "E5-large-v2",
+     "diff": 1.64,
+     "n": 91,
+     "p": 0.4293,
+     "p_holm": 0.8586,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "Instructor-XL",
+     "b": "GTR-T5-large",
+     "diff": 2.59,
+     "n": 91,
+     "p": 0.0765,
+     "p_holm": 0.3062,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "Instructor-XL",
+     "b": "E5-large-v2",
+     "diff": 4.23,
+     "n": 91,
+     "p": 0.0355,
+     "p_holm": 0.1777,
+     "significant": false
+    }
+   ],
+   "top_tier": [
+    "Instructor-XL",
+    "BM25",
+    "GTR-T5-large",
+    "E5-large-v2"
+   ],
+   "top_tier_untested": [],
+   "untestable": []
+  },
+  "A1__irpapers": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "GritLM-7B",
+     "b": "BM25",
+     "diff": 4.47,
+     "n": 179,
+     "p": 0.0574,
+     "p_holm": 0.2296,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "BM25",
+     "b": "GTR-T5-large",
+     "diff": 0.0,
+     "n": 179,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "GTR-T5-large",
+     "b": "E5-large-v2",
+     "diff": 0.0,
+     "n": 179,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "E5-large-v2",
+     "b": "Instructor-XL",
+     "diff": 8.38,
+     "n": 179,
+     "p": 0.0015,
+     "p_holm": 0.0093,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "GritLM-7B",
+     "b": "GTR-T5-large",
+     "diff": 4.47,
+     "n": 179,
+     "p": 0.0217,
+     "p_holm": 0.1085,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "GritLM-7B",
+     "b": "E5-large-v2",
+     "diff": 4.47,
+     "n": 179,
+     "p": 0.059,
+     "p_holm": 0.2296,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "GritLM-7B",
+     "b": "Instructor-XL",
+     "diff": 12.85,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0003,
+     "significant": true
+    }
+   ],
+   "top_tier": [
+    "GritLM-7B",
+    "BM25",
+    "GTR-T5-large",
+    "E5-large-v2"
+   ],
+   "top_tier_untested": [],
+   "untestable": []
+  },
+  "A1__maple": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "GritLM-7B",
+     "b": "BM25",
+     "diff": 21.76,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "adjacent",
+     "a": "BM25",
+     "b": "Instructor-XL",
+     "diff": 9.21,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "adjacent",
+     "a": "Instructor-XL",
+     "b": "E5-large-v2",
+     "diff": 2.68,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "adjacent",
+     "a": "E5-large-v2",
+     "b": "GTR-T5-large",
+     "diff": 12.88,
+     "n": 2095,
+     "p": 0.0,
+     "p_holm": 0.0,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "GritLM-7B",
+     "b": "Instructor-XL",
+     "diff": 30.97,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "best_vs",
+     "a": "GritLM-7B",
+     "b": "E5-large-v2",
+     "diff": 33.65,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "best_vs",
+     "a": "GritLM-7B",
+     "b": "GTR-T5-large",
+     "diff": 46.53,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    }
+   ],
+   "top_tier": null,
+   "top_tier_untested": [],
+   "untestable": [
+    "GritLM-7B",
+    "Instructor-XL"
+   ]
+  },
+  "A2__litsearch": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "E5-L-v2",
+     "b": "SPECTER-v2",
+     "diff": 9.41,
+     "n": 597,
+     "p": 0.0001,
+     "p_holm": 0.0016,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "SPECTER-v2",
+     "b": "ColBERT-v2",
+     "diff": 0.06,
+     "n": 597,
+     "p": 0.9859,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "ColBERT-v2",
+     "b": "SPLADE-v2",
+     "diff": 0.9,
+     "n": 597,
+     "p": 0.6383,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SPLADE-v2",
+     "b": "SentBERT",
+     "diff": 1.92,
+     "n": 597,
+     "p": 0.3903,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SentBERT",
+     "b": "BM25",
+     "diff": 0.1,
+     "n": 597,
+     "p": 0.9639,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "BM25",
+     "b": "TF-IDF",
+     "diff": 9.72,
+     "n": 597,
+     "p": 0.0001,
+     "p_holm": 0.0016,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "TF-IDF",
+     "b": "ANCE-FirstP",
+     "diff": 2.83,
+     "n": 597,
+     "p": 0.2319,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "ANCE-FirstP",
+     "b": "SimLM",
+     "diff": 0.28,
+     "n": 597,
+     "p": 0.9141,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SimLM",
+     "b": "SimCSE",
+     "diff": 8.37,
+     "n": 597,
+     "p": 0.0002,
+     "p_holm": 0.0022,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "SimCSE",
+     "b": "SciBERT",
+     "diff": 9.44,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "SciBERT",
+     "b": "LLAMA",
+     "diff": 2.82,
+     "n": 597,
+     "p": 0.1125,
+     "p_holm": 0.9,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "LLAMA",
+     "b": "ERNIE",
+     "diff": 1.62,
+     "n": 597,
+     "p": 0.3663,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "best_vs_bm25",
+     "a": "E5-L-v2",
+     "b": "BM25",
+     "diff": 12.39,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "ColBERT-v2",
+     "diff": 9.47,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "SPLADE-v2",
+     "diff": 10.37,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "SentBERT",
+     "diff": 12.29,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "TF-IDF",
+     "diff": 22.11,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "ANCE-FirstP",
+     "diff": 24.94,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "SimLM",
+     "diff": 25.22,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "SimCSE",
+     "diff": 33.59,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "SciBERT",
+     "diff": 43.03,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "LLAMA",
+     "diff": 45.85,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "ERNIE",
+     "diff": 47.47,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    }
+   ],
+   "top_tier": [
+    "E5-L-v2"
+   ],
+   "top_tier_untested": [],
+   "untestable": []
+  },
+  "A2__doris_mae": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "E5-L-v2",
+     "b": "SPECTER-v2",
+     "diff": 0.37,
+     "n": 91,
+     "p": 0.8501,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SPECTER-v2",
+     "b": "SPLADE-v2",
+     "diff": 0.81,
+     "n": 91,
+     "p": 0.731,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SPLADE-v2",
+     "b": "SentBERT",
+     "diff": 0.69,
+     "n": 91,
+     "p": 0.806,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SentBERT",
+     "b": "ColBERT-v2",
+     "diff": 0.39,
+     "n": 91,
+     "p": 0.8936,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "ColBERT-v2",
+     "b": "BM25",
+     "diff": 0.47,
+     "n": 91,
+     "p": 0.8686,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "BM25",
+     "b": "SimCSE",
+     "diff": 1.55,
+     "n": 91,
+     "p": 0.5526,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SimCSE",
+     "b": "TF-IDF",
+     "diff": 1.81,
+     "n": 91,
+     "p": 0.4298,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "TF-IDF",
+     "b": "SimLM",
+     "diff": 0.34,
+     "n": 91,
+     "p": 0.8748,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SimLM",
+     "b": "LLAMA",
+     "diff": 0.46,
+     "n": 91,
+     "p": 0.8397,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "LLAMA",
+     "b": "ANCE-FirstP",
+     "diff": 1.2,
+     "n": 91,
+     "p": 0.498,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "ANCE-FirstP",
+     "b": "SciBERT",
+     "diff": 0.78,
+     "n": 91,
+     "p": 0.7482,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SciBERT",
+     "b": "ERNIE",
+     "diff": 0.84,
+     "n": 91,
+     "p": 0.6393,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "best_vs_bm25",
+     "a": "E5-L-v2",
+     "b": "BM25",
+     "diff": 2.73,
+     "n": 91,
+     "p": 0.2774,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "SPLADE-v2",
+     "diff": 1.18,
+     "n": 91,
+     "p": 0.5423,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "SentBERT",
+     "diff": 1.87,
+     "n": 91,
+     "p": 0.4417,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "ColBERT-v2",
+     "diff": 2.26,
+     "n": 91,
+     "p": 0.2821,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "SimCSE",
+     "diff": 4.28,
+     "n": 91,
+     "p": 0.0227,
+     "p_holm": 0.3867,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "TF-IDF",
+     "diff": 6.09,
+     "n": 91,
+     "p": 0.0076,
+     "p_holm": 0.1368,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "SimLM",
+     "diff": 6.43,
+     "n": 91,
+     "p": 0.0005,
+     "p_holm": 0.0095,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "LLAMA",
+     "diff": 6.89,
+     "n": 91,
+     "p": 0.0002,
+     "p_holm": 0.005,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "ANCE-FirstP",
+     "diff": 8.09,
+     "n": 91,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "SciBERT",
+     "diff": 8.87,
+     "n": 91,
+     "p": 0.0001,
+     "p_holm": 0.0021,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "E5-L-v2",
+     "b": "ERNIE",
+     "diff": 9.71,
+     "n": 91,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    }
+   ],
+   "top_tier": [
+    "E5-L-v2",
+    "SPECTER-v2",
+    "BM25",
+    "SPLADE-v2",
+    "SentBERT",
+    "ColBERT-v2",
+    "SimCSE",
+    "TF-IDF"
+   ],
+   "top_tier_untested": [],
+   "untestable": []
+  },
+  "A2__irpapers": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "TF-IDF",
+     "b": "BM25",
+     "diff": 5.03,
+     "n": 179,
+     "p": 0.0233,
+     "p_holm": 0.1868,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "BM25",
+     "b": "E5-L-v2",
+     "diff": 1.12,
+     "n": 179,
+     "p": 0.8077,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "E5-L-v2",
+     "b": "SPLADE-v2",
+     "diff": 7.82,
+     "n": 179,
+     "p": 0.0071,
+     "p_holm": 0.0786,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SPLADE-v2",
+     "b": "SentBERT",
+     "diff": 0.0,
+     "n": 179,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SentBERT",
+     "b": "ANCE-FirstP",
+     "diff": 11.17,
+     "n": 179,
+     "p": 0.0032,
+     "p_holm": 0.0384,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "ANCE-FirstP",
+     "b": "ColBERT-v2",
+     "diff": 7.27,
+     "n": 179,
+     "p": 0.0987,
+     "p_holm": 0.5922,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "ColBERT-v2",
+     "b": "SimLM",
+     "diff": 7.26,
+     "n": 179,
+     "p": 0.0743,
+     "p_holm": 0.5201,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SimLM",
+     "b": "SPECTER-v2",
+     "diff": 6.14,
+     "n": 179,
+     "p": 0.1985,
+     "p_holm": 0.794,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SPECTER-v2",
+     "b": "SimCSE",
+     "diff": 2.8,
+     "n": 179,
+     "p": 0.6314,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SimCSE",
+     "b": "LLAMA",
+     "diff": 27.37,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "LLAMA",
+     "b": "SciBERT",
+     "diff": 9.5,
+     "n": 179,
+     "p": 0.0092,
+     "p_holm": 0.0828,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SciBERT",
+     "b": "ERNIE",
+     "diff": 4.47,
+     "n": 179,
+     "p": 0.1514,
+     "p_holm": 0.7572,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "TF-IDF",
+     "b": "E5-L-v2",
+     "diff": 6.15,
+     "n": 179,
+     "p": 0.008,
+     "p_holm": 0.08,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "TF-IDF",
+     "b": "SPLADE-v2",
+     "diff": 13.97,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "TF-IDF",
+     "b": "SentBERT",
+     "diff": 13.97,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "TF-IDF",
+     "b": "ANCE-FirstP",
+     "diff": 25.14,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "TF-IDF",
+     "b": "ColBERT-v2",
+     "diff": 32.41,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "TF-IDF",
+     "b": "SimLM",
+     "diff": 39.67,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "TF-IDF",
+     "b": "SPECTER-v2",
+     "diff": 45.81,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "TF-IDF",
+     "b": "SimCSE",
+     "diff": 48.61,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "TF-IDF",
+     "b": "LLAMA",
+     "diff": 75.98,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "TF-IDF",
+     "b": "SciBERT",
+     "diff": 85.48,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "TF-IDF",
+     "b": "ERNIE",
+     "diff": 89.95,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0011,
+     "significant": true
+    }
+   ],
+   "top_tier": [
+    "TF-IDF",
+    "BM25",
+    "E5-L-v2"
+   ],
+   "top_tier_untested": [],
+   "untestable": []
+  },
+  "A2__maple": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "SPECTER-v2",
+     "b": "E5-L-v2",
+     "diff": 0.72,
+     "n": 2095,
+     "p": 0.5846,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "E5-L-v2",
+     "b": "SPLADE-v2",
+     "diff": 1.48,
+     "n": 2095,
+     "p": 0.2096,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SPLADE-v2",
+     "b": "SentBERT",
+     "diff": 0.19,
+     "n": 2095,
+     "p": 0.9034,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SentBERT",
+     "b": "BM25",
+     "diff": 1.81,
+     "n": 2095,
+     "p": 0.19,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "BM25",
+     "b": "ColBERT-v2",
+     "diff": 0.15,
+     "n": 2095,
+     "p": 0.9345,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "ColBERT-v2",
+     "b": "TF-IDF",
+     "diff": 8.97,
+     "n": 2095,
+     "p": 0.0,
+     "p_holm": 0.001,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "TF-IDF",
+     "b": "ANCE-FirstP",
+     "diff": 0.48,
+     "n": 2095,
+     "p": 0.7149,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "ANCE-FirstP",
+     "b": "SimLM",
+     "diff": 3.15,
+     "n": 2095,
+     "p": 0.0069,
+     "p_holm": 0.0759,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SimLM",
+     "b": "LLAMA",
+     "diff": 4.29,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "adjacent",
+     "a": "LLAMA",
+     "b": "SimCSE",
+     "diff": 0.15,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "adjacent",
+     "a": "SimCSE",
+     "b": "ERNIE",
+     "diff": 0.95,
+     "n": 2095,
+     "p": 0.4197,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "ERNIE",
+     "b": "SciBERT",
+     "diff": 0.67,
+     "n": 2095,
+     "p": 0.5179,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "best_vs_bm25",
+     "a": "SPECTER-v2",
+     "b": "BM25",
+     "diff": 4.2,
+     "n": 2095,
+     "p": 0.0015,
+     "p_holm": 0.0186,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "SPECTER-v2",
+     "b": "SPLADE-v2",
+     "diff": 2.2,
+     "n": 2095,
+     "p": 0.0874,
+     "p_holm": 0.7866,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "SPECTER-v2",
+     "b": "SentBERT",
+     "diff": 2.39,
+     "n": 2095,
+     "p": 0.0692,
+     "p_holm": 0.692,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "SPECTER-v2",
+     "b": "ColBERT-v2",
+     "diff": 4.35,
+     "n": 2095,
+     "p": 0.0008,
+     "p_holm": 0.0104,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "SPECTER-v2",
+     "b": "TF-IDF",
+     "diff": 13.32,
+     "n": 2095,
+     "p": 0.0,
+     "p_holm": 0.001,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "SPECTER-v2",
+     "b": "ANCE-FirstP",
+     "diff": 13.8,
+     "n": 2095,
+     "p": 0.0,
+     "p_holm": 0.001,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "SPECTER-v2",
+     "b": "SimLM",
+     "diff": 16.95,
+     "n": 2095,
+     "p": 0.0,
+     "p_holm": 0.001,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "SPECTER-v2",
+     "b": "LLAMA",
+     "diff": 21.24,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "best_vs",
+     "a": "SPECTER-v2",
+     "b": "SimCSE",
+     "diff": 21.39,
+     "n": 2095,
+     "p": 0.0,
+     "p_holm": 0.001,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "SPECTER-v2",
+     "b": "ERNIE",
+     "diff": 22.34,
+     "n": 2095,
+     "p": 0.0,
+     "p_holm": 0.001,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "SPECTER-v2",
+     "b": "SciBERT",
+     "diff": 23.01,
+     "n": 2095,
+     "p": 0.0,
+     "p_holm": 0.001,
+     "significant": true
+    }
+   ],
+   "top_tier": [
+    "SPECTER-v2",
+    "E5-L-v2",
+    "SPLADE-v2",
+    "SentBERT"
+   ],
+   "top_tier_untested": [
+    "LLAMA"
+   ],
+   "untestable": [
+    "LLAMA"
+   ]
+  },
+  "A3__litsearch": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "Hybrid text (BM25 + Arctic, RSF)",
+     "b": "Arctic-embed 2.0",
+     "diff": 6.25,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0001,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "Arctic-embed 2.0",
+     "b": "BM25",
+     "diff": 7.9,
+     "n": 597,
+     "p": 0.0001,
+     "p_holm": 0.0001,
+     "significant": true
+    },
+    {
+     "kind": "best_vs_bm25",
+     "a": "Hybrid text (BM25 + Arctic, RSF)",
+     "b": "BM25",
+     "diff": 14.15,
+     "n": 597,
+     "p": 0.0,
+     "p_holm": 0.0001,
+     "significant": true
+    }
+   ],
+   "top_tier": [
+    "Hybrid text (BM25 + Arctic, RSF)"
+   ],
+   "top_tier_untested": [],
+   "untestable": []
+  },
+  "A3__doris_mae": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "Hybrid text (BM25 + Arctic, RSF)",
+     "b": "Arctic-embed 2.0",
+     "diff": 3.02,
+     "n": 91,
+     "p": 0.0014,
+     "p_holm": 0.0029,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "Arctic-embed 2.0",
+     "b": "BM25",
+     "diff": 2.13,
+     "n": 91,
+     "p": 0.2748,
+     "p_holm": 0.2748,
+     "significant": false
+    },
+    {
+     "kind": "best_vs_bm25",
+     "a": "Hybrid text (BM25 + Arctic, RSF)",
+     "b": "BM25",
+     "diff": 5.15,
+     "n": 91,
+     "p": 0.0001,
+     "p_holm": 0.0003,
+     "significant": true
+    }
+   ],
+   "top_tier": [
+    "Hybrid text (BM25 + Arctic, RSF)"
+   ],
+   "top_tier_untested": [],
+   "untestable": []
+  },
+  "A3__irpapers": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "Multimodal hybrid (text hybrid + ColModernVBERT)",
+     "b": "Hybrid text (BM25 + Arctic, RSF)",
+     "diff": 1.12,
+     "n": 179,
+     "p": 0.7248,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "Hybrid text (BM25 + Arctic, RSF)",
+     "b": "BM25",
+     "diff": 2.23,
+     "n": 179,
+     "p": 0.2923,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "BM25",
+     "b": "ColModernVBERT",
+     "diff": 1.12,
+     "n": 179,
+     "p": 0.8244,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "ColModernVBERT",
+     "b": "ColQwen2",
+     "diff": 0.0,
+     "n": 179,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "ColQwen2",
+     "b": "ColPali",
+     "diff": 0.56,
+     "n": 179,
+     "p": 1.0,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "ColPali",
+     "b": "Arctic-embed 2.0",
+     "diff": 6.14,
+     "n": 179,
+     "p": 0.0871,
+     "p_holm": 0.6968,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "Arctic-embed 2.0",
+     "b": "MUVERA (ColModernVBERT FDE, ef=1024)",
+     "diff": 3.36,
+     "n": 179,
+     "p": 0.4521,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "best_vs_bm25",
+     "a": "Multimodal hybrid (text hybrid + ColModernVBERT)",
+     "b": "BM25",
+     "diff": 3.35,
+     "n": 179,
+     "p": 0.1106,
+     "p_holm": 0.7742,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "Multimodal hybrid (text hybrid + ColModernVBERT)",
+     "b": "ColModernVBERT",
+     "diff": 4.47,
+     "n": 179,
+     "p": 0.0396,
+     "p_holm": 0.4361,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "Multimodal hybrid (text hybrid + ColModernVBERT)",
+     "b": "ColQwen2",
+     "diff": 4.47,
+     "n": 179,
+     "p": 0.0555,
+     "p_holm": 0.555,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "Multimodal hybrid (text hybrid + ColModernVBERT)",
+     "b": "ColPali",
+     "diff": 5.03,
+     "n": 179,
+     "p": 0.0606,
+     "p_holm": 0.555,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "Multimodal hybrid (text hybrid + ColModernVBERT)",
+     "b": "Arctic-embed 2.0",
+     "diff": 11.17,
+     "n": 179,
+     "p": 0.0001,
+     "p_holm": 0.0012,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "Multimodal hybrid (text hybrid + ColModernVBERT)",
+     "b": "MUVERA (ColModernVBERT FDE, ef=1024)",
+     "diff": 14.53,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0006,
+     "significant": true
+    }
+   ],
+   "top_tier": [
+    "Multimodal hybrid (text hybrid + ColModernVBERT)",
+    "Hybrid text (BM25 + Arctic, RSF)",
+    "BM25",
+    "ColModernVBERT",
+    "ColQwen2",
+    "ColPali"
+   ],
+   "top_tier_untested": [],
+   "untestable": []
+  },
+  "A3__maple": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "Hybrid text (BM25 + Arctic, RSF)",
+     "b": "Arctic-embed 2.0",
+     "diff": 7.97,
+     "n": 2095,
+     "p": 0.0,
+     "p_holm": 0.0001,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "Arctic-embed 2.0",
+     "b": "BM25",
+     "diff": 0.91,
+     "n": 2095,
+     "p": 0.4502,
+     "p_holm": 0.4502,
+     "significant": false
+    },
+    {
+     "kind": "best_vs_bm25",
+     "a": "Hybrid text (BM25 + Arctic, RSF)",
+     "b": "BM25",
+     "diff": 8.88,
+     "n": 2095,
+     "p": 0.0,
+     "p_holm": 0.0001,
+     "significant": true
+    }
+   ],
+   "top_tier": [
+    "Hybrid text (BM25 + Arctic, RSF)"
+   ],
+   "top_tier_untested": [],
+   "untestable": []
+  },
+  "A4__litsearch": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "Qwen3-Embed-8B",
+     "b": "GritLM-7B",
+     "diff": 2.34,
+     "n": 639,
+     "p": 0.0942,
+     "p_holm": 0.1885,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "GritLM-7B",
+     "b": "Instructor-XL",
+     "diff": 15.97,
+     "n": 639,
+     "p": 0.0,
+     "p_holm": 0.0005,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "Instructor-XL",
+     "b": "BGE-M3",
+     "diff": 3.75,
+     "n": 639,
+     "p": 0.0621,
+     "p_holm": 0.1864,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "BGE-M3",
+     "b": "SPECTER2",
+     "diff": 0.94,
+     "n": 639,
+     "p": 0.7168,
+     "p_holm": 0.7168,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SPECTER2",
+     "b": "BM25",
+     "diff": 6.57,
+     "n": 639,
+     "p": 0.0076,
+     "p_holm": 0.0382,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "BM25",
+     "b": "SciNCL",
+     "diff": 6.58,
+     "n": 639,
+     "p": 0.0108,
+     "p_holm": 0.0434,
+     "significant": true
+    },
+    {
+     "kind": "best_vs_bm25",
+     "a": "Qwen3-Embed-8B",
+     "b": "BM25",
+     "diff": 29.57,
+     "n": 639,
+     "p": 0.0,
+     "p_holm": 0.0005,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "Qwen3-Embed-8B",
+     "b": "Instructor-XL",
+     "diff": 18.31,
+     "n": 639,
+     "p": 0.0,
+     "p_holm": 0.0005,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "Qwen3-Embed-8B",
+     "b": "BGE-M3",
+     "diff": 22.06,
+     "n": 639,
+     "p": 0.0,
+     "p_holm": 0.0005,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "Qwen3-Embed-8B",
+     "b": "SPECTER2",
+     "diff": 23.0,
+     "n": 639,
+     "p": 0.0,
+     "p_holm": 0.0005,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "Qwen3-Embed-8B",
+     "b": "SciNCL",
+     "diff": 36.15,
+     "n": 639,
+     "p": 0.0,
+     "p_holm": 0.0005,
+     "significant": true
+    }
+   ],
+   "top_tier": [
+    "Qwen3-Embed-8B",
+    "GritLM-7B"
+   ],
+   "top_tier_untested": [],
+   "untestable": []
+  },
+  "A4__doris_mae": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "BM25",
+     "b": "Instructor-XL",
+     "diff": 0.09,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "adjacent",
+     "a": "Instructor-XL",
+     "b": "BGE-M3",
+     "diff": 0.84,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "adjacent",
+     "a": "BGE-M3",
+     "b": "SPECTER2",
+     "diff": 1.12,
+     "n": 7628,
+     "p": 0.0,
+     "p_holm": 0.0002,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "SPECTER2",
+     "b": "SciNCL",
+     "diff": 0.07,
+     "n": 7628,
+     "p": 0.7398,
+     "p_holm": 0.7398,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "BM25",
+     "b": "BGE-M3",
+     "diff": 0.93,
+     "n": 7628,
+     "p": 0.0031,
+     "p_holm": 0.0063,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "BM25",
+     "b": "SPECTER2",
+     "diff": 2.05,
+     "n": 7628,
+     "p": 0.0,
+     "p_holm": 0.0002,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "BM25",
+     "b": "SciNCL",
+     "diff": 2.12,
+     "n": 7628,
+     "p": 0.0,
+     "p_holm": 0.0002,
+     "significant": true
+    }
+   ],
+   "top_tier": [
+    "BM25"
+   ],
+   "top_tier_untested": [
+    "Instructor-XL"
+   ],
+   "untestable": [
+    "Instructor-XL"
+   ]
+  },
+  "A4__irpapers": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "BM25",
+     "b": "GritLM-7B",
+     "diff": 1.11,
+     "n": 179,
+     "p": 0.686,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "GritLM-7B",
+     "b": "Qwen3-Embed-8B",
+     "diff": 1.12,
+     "n": 179,
+     "p": 0.6859,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "Qwen3-Embed-8B",
+     "b": "BGE-M3",
+     "diff": 1.68,
+     "n": 179,
+     "p": 0.5518,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "BGE-M3",
+     "b": "Instructor-XL",
+     "diff": 10.05,
+     "n": 179,
+     "p": 0.0006,
+     "p_holm": 0.0045,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "Instructor-XL",
+     "b": "SPECTER2",
+     "diff": 27.38,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0005,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "SPECTER2",
+     "b": "SciNCL",
+     "diff": 7.82,
+     "n": 179,
+     "p": 0.0199,
+     "p_holm": 0.1194,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "BM25",
+     "b": "Qwen3-Embed-8B",
+     "diff": 2.23,
+     "n": 179,
+     "p": 0.2901,
+     "p_holm": 1.0,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "BM25",
+     "b": "BGE-M3",
+     "diff": 3.91,
+     "n": 179,
+     "p": 0.0646,
+     "p_holm": 0.323,
+     "significant": false
+    },
+    {
+     "kind": "best_vs",
+     "a": "BM25",
+     "b": "Instructor-XL",
+     "diff": 13.96,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0005,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "BM25",
+     "b": "SPECTER2",
+     "diff": 41.34,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0005,
+     "significant": true
+    },
+    {
+     "kind": "best_vs",
+     "a": "BM25",
+     "b": "SciNCL",
+     "diff": 49.16,
+     "n": 179,
+     "p": 0.0,
+     "p_holm": 0.0005,
+     "significant": true
+    }
+   ],
+   "top_tier": [
+    "BM25",
+    "GritLM-7B",
+    "Qwen3-Embed-8B",
+    "BGE-M3"
+   ],
+   "top_tier_untested": [],
+   "untestable": []
+  },
+  "A4__maple": {
+   "tests": [
+    {
+     "kind": "adjacent",
+     "a": "Instructor-XL",
+     "b": "SPECTER2",
+     "diff": 1.81,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "adjacent",
+     "a": "SPECTER2",
+     "b": "BGE-M3",
+     "diff": 4.11,
+     "n": 2095,
+     "p": 0.0004,
+     "p_holm": 0.0013,
+     "significant": true
+    },
+    {
+     "kind": "adjacent",
+     "a": "BGE-M3",
+     "b": "SciNCL",
+     "diff": 0.76,
+     "n": 2095,
+     "p": 0.5205,
+     "p_holm": 0.5205,
+     "significant": false
+    },
+    {
+     "kind": "adjacent",
+     "a": "SciNCL",
+     "b": "BM25",
+     "diff": 2.68,
+     "n": 2095,
+     "p": 0.0286,
+     "p_holm": 0.0572,
+     "significant": false
+    },
+    {
+     "kind": "best_vs_bm25",
+     "a": "Instructor-XL",
+     "b": "BM25",
+     "diff": 9.36,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "best_vs",
+     "a": "Instructor-XL",
+     "b": "BGE-M3",
+     "diff": 5.92,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "best_vs",
+     "a": "Instructor-XL",
+     "b": "SciNCL",
+     "diff": 6.68,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    }
+   ],
+   "top_tier": null,
+   "top_tier_untested": [],
+   "untestable": [
+    "Instructor-XL"
+   ]
+  }
+ }
+}

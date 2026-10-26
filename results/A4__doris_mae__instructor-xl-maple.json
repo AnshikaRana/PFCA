@@ -1,0 +1,61 @@
+{
+  "arch": "A4",
+  "arch_name": "MAPLE",
+  "dataset": "doris_mae",
+  "model_key": "instructor-xl-maple",
+  "model_name": "Instructor-XL",
+  "tier": "kaggle",
+  "status": "done",
+  "reason": "",
+  "recall@10": 5.01,
+  "recall@10_se": 0.25,
+  "native": {
+    "AllAspect@5": 0.13,
+    "AnyAspect@5": 10.75,
+    "AspectCoverage@5": 3.08,
+    "AllAspect@10": 0.13,
+    "AnyAspect@10": 16.95,
+    "AspectCoverage@10": 5.01,
+    "AllAspect@20": 0.32,
+    "AnyAspect@20": 27.32,
+    "AspectCoverage@20": 8.57,
+    "n_target_papers": 1581,
+    "avg_queries_per_paper": 4.82
+  },
+  "breakdown": {
+    "unlabeled": {
+      "R@5": 3.07,
+      "R@10": 5.01,
+      "R@20": 8.52,
+      "n": 7628
+    }
+  },
+  "task": {
+    "arch": "A4",
+    "arch_name": "MAPLE",
+    "dataset": "doris_mae",
+    "fidelity": "approximate",
+    "deviations": [
+      "[approx] No full text: the abstract stands in for the holistic paper.",
+      "Aspect queries = DORIS aspects with score >= 1 for each relevant paper (the paper is their target).",
+      "Search space = all 363,133 abstracts."
+    ],
+    "format_card": {
+      "query": "Aspect query (motivation / method / experiment-result), many per paper",
+      "document": "Whole paper, holistic full text (truncated to model max input)",
+      "answer": "One target paper per query; queries grouped by paper",
+      "search": "Full corpus (363,133 papers)"
+    },
+    "stats": {
+      "n_docs": 363133,
+      "n_queries": 7628,
+      "avg_gold_per_query": 1.0,
+      "avg_pool_size": null
+    },
+    "unit": "paper",
+    "gold_level": "doc",
+    "has_page_images": false
+  },
+  "per_query_recall@10": {},
+  "note": "Run on Kaggle (2x T4), session I3 (run 361621747). Per-query table on Kaggle is incomplete (3,918 of 7,628 query IDs; duplicates overwritten), so it is left out of significance tests."
+}

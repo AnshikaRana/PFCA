@@ -1,0 +1,26 @@
+{
+ "arch": "A3",
+ "arch_name": "IRPAPERS",
+ "dataset": "doris_mae",
+ "fidelity": "approximate",
+ "deviations": [
+  "[approx] No full text or pages: each abstract is a single 'page'.",
+  "[approx] Gold is paper-level: a query succeeds if any page of a gold paper is retrieved (IRPAPERS gold is a single page).",
+  "Image-track models are N/A: this dataset has no page images."
+ ],
+ "format_card": {
+  "query": "Page-grounded question",
+  "document": "Page (OCR text; page image for image models)",
+  "answer": "Gold paper(s); success if any of its pages is retrieved",
+  "search": "Full page collection (363,133 pages)"
+ },
+ "stats": {
+  "n_docs": 363133,
+  "n_queries": 91,
+  "avg_gold_per_query": 18.04,
+  "avg_pool_size": null
+ },
+ "unit": "page",
+ "gold_level": "paper",
+ "has_page_images": false
+}

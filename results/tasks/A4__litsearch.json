@@ -1,0 +1,26 @@
+{
+ "arch": "A4",
+ "arch_name": "MAPLE",
+ "dataset": "litsearch",
+ "fidelity": "faithful",
+ "deviations": [
+  "Holistic document = title + full paper text (truncated to each model's max input).",
+  "Multi-gold questions expanded into one (query, target) pair per gold paper.",
+  "No aspect labels: aspect-group breakdown is 'unlabeled'; most papers have one query, so AllAspect ~= AnyAspect."
+ ],
+ "format_card": {
+  "query": "Aspect query (motivation / method / experiment-result), many per paper",
+  "document": "Whole paper, holistic full text (truncated to model max input)",
+  "answer": "One target paper per query; queries grouped by paper",
+  "search": "Full corpus (64,183 papers)"
+ },
+ "stats": {
+  "n_docs": 64183,
+  "n_queries": 639,
+  "avg_gold_per_query": 1.0,
+  "avg_pool_size": null
+ },
+ "unit": "paper",
+ "gold_level": "doc",
+ "has_page_images": false
+}

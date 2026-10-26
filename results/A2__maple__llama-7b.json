@@ -1,0 +1,65 @@
+{
+ "arch": "A2",
+ "arch_name": "DORIS-MAE",
+ "dataset": "maple",
+ "model_key": "llama-7b",
+ "model_name": "LLAMA",
+ "tier": "kaggle",
+ "status": "done",
+ "reason": "",
+ "recall@10": 18.19,
+ "recall@10_se": 0.81,
+ "native": {
+  "R@5": 10.26,
+  "R@5_se": 0.64,
+  "R@20": 32.17,
+  "R@20_se": 1,
+  "RP": 1.91,
+  "RP_se": 0.29,
+  "NDCGexp@10%": 63.63,
+  "NDCGexp@10%_se": 0.17,
+  "MRR@10": 5.67,
+  "MRR@10_se": 0.35,
+  "MAP": 8.19,
+  "MAP_se": 0.34,
+  "n_queries_with_relevant": 2095,
+  "n_queries_without_relevant": 0
+ },
+ "breakdown": {},
+ "config": {
+  "checkpoint": "huggyllama/llama-7b",
+  "max_len": 512,
+  "multi_gpu": true,
+  "device": "cuda",
+  "pooling": "mean"
+ },
+ "timestamp": "2026-10-16 04:22",
+ "task": {
+  "arch": "A2",
+  "arch_name": "DORIS-MAE",
+  "dataset": "maple",
+  "fidelity": "faithful",
+  "deviations": [
+   "Candidate pools built with the DORIS recipe: BM25 paragraph+sentence (~80) + 20 dense (bge-small-en-v1.5, outside every zoo) + gold, shuffled.",
+   "Binary gold mapped to graded scale: gold = 2, other pooled = 0 (relevant iff >= 1).",
+   "Query has no aspect decomposition; sentence-by-sentence mode uses sentence splitting."
+  ],
+  "format_card": {
+   "query": "Complex multi-aspect paragraph (whole string or sentence-by-sentence)",
+   "document": "Abstract",
+   "answer": "Graded relevance over the candidate pool; relevant iff score >= 1",
+   "search": "Re-rank ~100-paper pool per query"
+  },
+  "stats": {
+   "n_docs": 40995,
+   "n_queries": 2095,
+   "avg_gold_per_query": 1.0,
+   "avg_pool_size": 100.0
+  },
+  "unit": "abstract",
+  "gold_level": "doc",
+  "has_page_images": false
+ },
+ "per_query_recall@10": {},
+ "note": "Full result from Kaggle session A output (per-query values kept on Kaggle)."
+}

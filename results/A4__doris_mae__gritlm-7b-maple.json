@@ -1,0 +1,10 @@
+{
+ "arch": "A4",
+ "dataset": "doris_mae",
+ "model_key": "gritlm-7b-maple",
+ "model_name": "GritLM-7B",
+ "tier": "kaggle",
+ "status": "too_large",
+ "reason": "Too large for free GPUs: a 7-8B model over DORIS-MAE's 363K abstracts needs about 17 GPU hours on Kaggle's T4s, more than one 12-hour session. Not run by choice (2026-10-08).",
+ "timestamp": "2026-10-08 15:58:40"
+}

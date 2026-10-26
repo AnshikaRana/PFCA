@@ -1,0 +1,8 @@
+# Large or generated files (not part of the repository)
+data/
+results/tasks/*.pkl
+kaggle/returned/
+__pycache__/
+*.pyc
+*.log
+.ipynb_checkpoints/

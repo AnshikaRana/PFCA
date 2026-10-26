@@ -1,0 +1,25 @@
+{
+ "arch": "A1",
+ "arch_name": "LitSearch",
+ "dataset": "maple",
+ "fidelity": "faithful",
+ "deviations": [
+  "Title + abstract representation (MAPLE 'abstract'); titles rebuilt from paper slugs where needed.",
+  "One target paper per query, so all queries are 'specific'."
+ ],
+ "format_card": {
+  "query": "Natural-language literature-search question (+ broad/specific tag)",
+  "document": "Paper = title + abstract",
+  "answer": "Set of gold papers, binary relevance",
+  "search": "Full corpus (73,973 papers)"
+ },
+ "stats": {
+  "n_docs": 73973,
+  "n_queries": 2095,
+  "avg_gold_per_query": 1.0,
+  "avg_pool_size": null
+ },
+ "unit": "paper",
+ "gold_level": "doc",
+ "has_page_images": false
+}

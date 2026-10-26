@@ -1,0 +1,55 @@
+{
+  "arch": "A1",
+  "arch_name": "LitSearch",
+  "dataset": "maple",
+  "model_key": "instructor-xl-litsearch",
+  "model_name": "Instructor-XL",
+  "tier": "kaggle",
+  "status": "done",
+  "reason": "",
+  "recall@10": 29.98,
+  "recall@10_se": 0.98,
+  "native": {
+    "broad_R@20": null,
+    "specific_R@5": 23.15,
+    "specific_R@20": 37.85,
+    "n_broad": 0,
+    "n_specific": 2095
+  },
+  "breakdown": {
+    "foreign": {
+      "broad_R@20": null,
+      "specific_R@5": 23.15,
+      "specific_R@20": 37.85,
+      "R@10": 29.98,
+      "n": 2095
+    }
+  },
+  "task": {
+    "arch": "A1",
+    "arch_name": "LitSearch",
+    "dataset": "maple",
+    "fidelity": "faithful",
+    "deviations": [
+      "Title + abstract representation (MAPLE 'abstract'); titles rebuilt from paper slugs where needed.",
+      "One target paper per query, so all queries are 'specific'."
+    ],
+    "format_card": {
+      "query": "Natural-language literature-search question (+ broad/specific tag)",
+      "document": "Paper = title + abstract",
+      "answer": "Set of gold papers, binary relevance",
+      "search": "Full corpus (73,973 papers)"
+    },
+    "stats": {
+      "n_docs": 73973,
+      "n_queries": 2095,
+      "avg_gold_per_query": 1.0,
+      "avg_pool_size": null
+    },
+    "unit": "paper",
+    "gold_level": "doc",
+    "has_page_images": false
+  },
+  "per_query_recall@10": {},
+  "note": "Run on Kaggle (2x T4); per-query recalls kept in Kaggle output."
+}
