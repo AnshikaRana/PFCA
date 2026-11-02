@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-24 16:15 UTC",
+ "generated": "2026-10-31 21:49 UTC",
  "gate": 3.0,
  "alpha": 0.05,
  "n_perm": 20000,
@@ -22,12 +22,12 @@
   "A4": "maple"
  },
  "headline": {
-  "n_results": 112,
-  "n_pending": 2,
+  "n_results": 114,
+  "n_pending": 0,
   "validation": {
-   "checked": 29,
+   "checked": 31,
    "passed": 16,
-   "outside_higher": 9,
+   "outside_higher": 11,
    "outside_lower": 4,
    "outside": [
     "BM25 (LitSearch)",
@@ -42,14 +42,16 @@
     "Multimodal hybrid (text hybrid + ColModernVBERT) (IRPAPERS)",
     "MUVERA (ColModernVBERT FDE, ef=1024) (IRPAPERS)",
     "SPECTER2 (MAPLE)",
-    "Instructor-XL (MAPLE)"
+    "Instructor-XL (MAPLE)",
+    "Qwen3-Embed-8B (MAPLE)",
+    "GritLM-7B (MAPLE)"
    ]
   },
   "ranking": {
-   "mean_tau": 0.35,
-   "min_tau": -0.2,
+   "mean_tau": 0.411,
+   "min_tau": 0.0,
    "max_tau": 0.795,
-   "winner_kept": "7/12"
+   "winner_kept": "6/12"
   },
   "bm25_format_spread": {
    "LitSearch": 10.35,
@@ -1396,7 +1398,50 @@
    "key": "qwen3-embed-8b",
    "name": "Qwen3-Embed-8B",
    "tier": "kaggle",
-   "status": "pending"
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "AllAspect@5",
+     "reported": 3.3,
+     "measured": 5.24,
+     "diff": 1.94
+    },
+    {
+     "metric": "AllAspect@20",
+     "reported": 11.0,
+     "measured": 14.29,
+     "diff": 3.29
+    },
+    {
+     "metric": "AnyAspect@5",
+     "reported": 75.7,
+     "measured": 89.52,
+     "diff": 13.82
+    },
+    {
+     "metric": "AnyAspect@20",
+     "reported": 91.0,
+     "measured": 98.1,
+     "diff": 7.1
+    },
+    {
+     "metric": "AspectCoverage@5",
+     "reported": 29.9,
+     "measured": 43.34,
+     "diff": 13.44
+    },
+    {
+     "metric": "AspectCoverage@20",
+     "reported": 53.3,
+     "measured": 64.34,
+     "diff": 11.04
+    }
+   ],
+   "max_abs_diff": 13.82,
+   "worst_signed": 13.82,
+   "direction": "higher",
+   "verdict": "outside",
+   "note": "Run on Kaggle (2x T4), checkpointed encoding (31 Oct 2026); per-query table incomplete on Kaggle (1902 of 2095 keys, duplicate qids), so stripped and excluded from significance tests."
   },
   {
    "arch": "A4",
@@ -1404,7 +1449,50 @@
    "key": "gritlm-7b-maple",
    "name": "GritLM-7B",
    "tier": "kaggle",
-   "status": "pending"
+   "status": "done",
+   "metrics": [
+    {
+     "metric": "AllAspect@5",
+     "reported": 3.3,
+     "measured": 5.24,
+     "diff": 1.94
+    },
+    {
+     "metric": "AllAspect@20",
+     "reported": 15.7,
+     "measured": 19.52,
+     "diff": 3.82
+    },
+    {
+     "metric": "AnyAspect@5",
+     "reported": 89.5,
+     "measured": 93.33,
+     "diff": 3.83
+    },
+    {
+     "metric": "AnyAspect@20",
+     "reported": 98.1,
+     "measured": 98.57,
+     "diff": 0.47
+    },
+    {
+     "metric": "AspectCoverage@5",
+     "reported": 43.0,
+     "measured": 46.38,
+     "diff": 3.38
+    },
+    {
+     "metric": "AspectCoverage@20",
+     "reported": 61.8,
+     "measured": 66.23,
+     "diff": 4.43
+    }
+   ],
+   "max_abs_diff": 4.43,
+   "worst_signed": 4.43,
+   "direction": "higher",
+   "verdict": "outside",
+   "note": "Run on Kaggle (2x T4), checkpointed encoding (31 Oct 2026); per-query table incomplete on Kaggle (1902 of 2095 keys, duplicate qids), so stripped and excluded from significance tests."
   },
   {
    "arch": "A4",
@@ -2434,6 +2522,20 @@
    "native": true,
    "models": [
     {
+     "key": "gritlm-7b-maple",
+     "name": "GritLM-7B",
+     "r10": 56.47,
+     "se": 1.06,
+     "has_pq": false
+    },
+    {
+     "key": "qwen3-embed-8b",
+     "name": "Qwen3-Embed-8B",
+     "r10": 53.37,
+     "se": 1.08,
+     "has_pq": false
+    },
+    {
      "key": "instructor-xl-maple",
      "name": "Instructor-XL",
      "r10": 30.55,
@@ -2471,17 +2573,14 @@
    ],
    "bm25": 21.19,
    "best": {
-    "key": "instructor-xl-maple",
-    "name": "Instructor-XL",
-    "r10": 30.55,
-    "se": 1.02,
+    "key": "gritlm-7b-maple",
+    "name": "GritLM-7B",
+    "r10": 56.47,
+    "se": 1.06,
     "has_pq": false
    },
-   "best_gain_over_bm25": 9.36,
-   "pending": [
-    "Qwen3-Embed-8B",
-    "GritLM-7B"
-   ]
+   "best_gain_over_bm25": 35.28,
+   "pending": []
   }
  },
  "ranking": [
@@ -2711,25 +2810,25 @@
   {
    "arch": "A4",
    "dataset": "litsearch",
-   "n_models": 5,
+   "n_models": 7,
    "few_models": false,
-   "tau": 0.6,
-   "native_best": "Instructor-XL",
-   "foreign_best": "Instructor-XL",
-   "winner_kept": true,
+   "tau": 0.714,
+   "native_best": "GritLM-7B",
+   "foreign_best": "Qwen3-Embed-8B",
+   "winner_kept": false,
    "biggest_moves": [
     {
-     "name": "SPECTER2",
-     "native_rank": 2,
-     "rank": 3
-    },
-    {
-     "name": "BGE-M3",
-     "native_rank": 3,
+     "name": "GritLM-7B",
+     "native_rank": 1,
      "rank": 2
     },
     {
-     "name": "SciNCL",
+     "name": "Qwen3-Embed-8B",
+     "native_rank": 2,
+     "rank": 1
+    },
+    {
+     "name": "SPECTER2",
      "native_rank": 4,
      "rank": 5
     }
@@ -2765,27 +2864,27 @@
   {
    "arch": "A4",
    "dataset": "irpapers",
-   "n_models": 5,
+   "n_models": 7,
    "few_models": false,
-   "tau": -0.2,
-   "native_best": "Instructor-XL",
+   "tau": 0.238,
+   "native_best": "GritLM-7B",
    "foreign_best": "BM25",
    "winner_kept": false,
    "biggest_moves": [
     {
      "name": "BM25",
-     "native_rank": 5,
+     "native_rank": 7,
      "rank": 1
     },
     {
      "name": "Instructor-XL",
-     "native_rank": 1,
-     "rank": 3
+     "native_rank": 3,
+     "rank": 5
     },
     {
      "name": "SPECTER2",
-     "native_rank": 2,
-     "rank": 4
+     "native_rank": 4,
+     "rank": 6
     }
    ]
   }
@@ -2924,6 +3023,15 @@
     "A4": 97.21
    },
    "spread": 0.0
+  },
+  {
+   "model": "GritLM-7B",
+   "dataset": "maple",
+   "by_arch": {
+    "A1": 60.95,
+    "A4": 56.47
+   },
+   "spread": 4.48
   }
  ],
  "significance": {
@@ -4770,6 +4878,22 @@
    "tests": [
     {
      "kind": "adjacent",
+     "a": "GritLM-7B",
+     "b": "Qwen3-Embed-8B",
+     "diff": 3.1,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "adjacent",
+     "a": "Qwen3-Embed-8B",
+     "b": "Instructor-XL",
+     "diff": 22.82,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "adjacent",
      "a": "Instructor-XL",
      "b": "SPECTER2",
      "diff": 1.81,
@@ -4808,25 +4932,41 @@
     },
     {
      "kind": "best_vs_bm25",
-     "a": "Instructor-XL",
+     "a": "GritLM-7B",
      "b": "BM25",
-     "diff": 9.36,
+     "diff": 35.28,
      "p": null,
      "reason": "per-query scores unavailable"
     },
     {
      "kind": "best_vs",
-     "a": "Instructor-XL",
+     "a": "GritLM-7B",
+     "b": "Instructor-XL",
+     "diff": 25.92,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "best_vs",
+     "a": "GritLM-7B",
+     "b": "SPECTER2",
+     "diff": 27.73,
+     "p": null,
+     "reason": "per-query scores unavailable"
+    },
+    {
+     "kind": "best_vs",
+     "a": "GritLM-7B",
      "b": "BGE-M3",
-     "diff": 5.92,
+     "diff": 31.84,
      "p": null,
      "reason": "per-query scores unavailable"
     },
     {
      "kind": "best_vs",
-     "a": "Instructor-XL",
+     "a": "GritLM-7B",
      "b": "SciNCL",
-     "diff": 6.68,
+     "diff": 32.6,
      "p": null,
      "reason": "per-query scores unavailable"
     }
@@ -4834,6 +4974,8 @@
    "top_tier": null,
    "top_tier_untested": [],
    "untestable": [
+    "GritLM-7B",
+    "Qwen3-Embed-8B",
     "Instructor-XL"
    ]
   }

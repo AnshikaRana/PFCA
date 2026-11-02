@@ -1,0 +1,86 @@
+{
+ "arch": "A4",
+ "arch_name": "MAPLE",
+ "dataset": "maple",
+ "model_key": "qwen3-embed-8b",
+ "model_name": "Qwen3-Embed-8B",
+ "tier": "kaggle",
+ "status": "done",
+ "reason": "",
+ "recall@10": 53.37,
+ "recall@10_se": 1.08,
+ "native": {
+  "AllAspect@5": 5.24,
+  "AnyAspect@5": 89.52,
+  "AspectCoverage@5": 43.34,
+  "AllAspect@10": 10.95,
+  "AnyAspect@10": 94.76,
+  "AspectCoverage@10": 53.82,
+  "AllAspect@20": 14.29,
+  "AnyAspect@20": 98.1,
+  "AspectCoverage@20": 64.34,
+  "n_target_papers": 210,
+  "avg_queries_per_paper": 9.98
+ },
+ "breakdown": {
+  "experiment/result": {
+   "R@5": 35.51,
+   "R@10": 45.31,
+   "R@20": 56.06,
+   "n": 949
+  },
+  "method": {
+   "R@5": 45.23,
+   "R@10": 56.62,
+   "R@20": 67.9,
+   "n": 922
+  },
+  "motivation": {
+   "R@5": 63.39,
+   "R@10": 74.11,
+   "R@20": 82.14,
+   "n": 224
+  },
+  "text-referenced": {
+   "R@10": 53.39,
+   "n": 1680
+  },
+  "multimodal-referenced": {
+   "R@10": 53.25,
+   "n": 415
+  }
+ },
+ "config": {
+  "checkpoint": "Qwen/Qwen3-Embedding-8B",
+  "max_len": 512,
+  "assumed_checkpoint": false,
+  "dtype": "float16",
+  "pooling": "last_token",
+  "q_prefix": "Instruct: Represent this paper search query for retrieval of relevant scientific papers\nQuery:"
+ },
+ "runtime_s": null,
+ "timestamp": "2026-10-31 21:40:00",
+ "task": {
+  "arch": "A4",
+  "arch_name": "MAPLE",
+  "dataset": "maple",
+  "fidelity": "native",
+  "deviations": [],
+  "format_card": {
+   "query": "Aspect query (motivation / method / experiment-result), many per paper",
+   "document": "Whole paper, holistic full text (truncated to model max input)",
+   "answer": "One target paper per query; queries grouped by paper",
+   "search": "Full corpus (73,973 papers)"
+  },
+  "stats": {
+   "n_docs": 73973,
+   "n_queries": 2095,
+   "avg_gold_per_query": 1,
+   "avg_pool_size": null
+  },
+  "unit": "paper",
+  "gold_level": "doc",
+  "has_page_images": false
+ },
+ "note": "Run on Kaggle (2x T4), checkpointed encoding (31 Oct 2026); per-query table incomplete on Kaggle (1902 of 2095 keys, duplicate qids), so stripped and excluded from significance tests."
+}

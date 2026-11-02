@@ -1,0 +1,86 @@
+{
+ "arch": "A4",
+ "arch_name": "MAPLE",
+ "dataset": "maple",
+ "model_key": "gritlm-7b-maple",
+ "model_name": "GritLM-7B",
+ "tier": "kaggle",
+ "status": "done",
+ "reason": "",
+ "recall@10": 56.47,
+ "recall@10_se": 1.06,
+ "native": {
+  "AllAspect@5": 5.24,
+  "AnyAspect@5": 93.33,
+  "AspectCoverage@5": 46.38,
+  "AllAspect@10": 10.95,
+  "AnyAspect@10": 97.14,
+  "AspectCoverage@10": 56.91,
+  "AllAspect@20": 19.52,
+  "AnyAspect@20": 98.57,
+  "AspectCoverage@20": 66.23,
+  "n_target_papers": 210,
+  "avg_queries_per_paper": 9.98
+ },
+ "breakdown": {
+  "experiment/result": {
+   "R@5": 37.83,
+   "R@10": 48.26,
+   "R@20": 58.59,
+   "n": 949
+  },
+  "method": {
+   "R@5": 49.02,
+   "R@10": 59.76,
+   "R@20": 68.76,
+   "n": 922
+  },
+  "motivation": {
+   "R@5": 66.52,
+   "R@10": 77.68,
+   "R@20": 85.71,
+   "n": 224
+  },
+  "text-referenced": {
+   "R@10": 56.85,
+   "n": 1680
+  },
+  "multimodal-referenced": {
+   "R@10": 54.94,
+   "n": 415
+  }
+ },
+ "config": {
+  "checkpoint": "GritLM/GritLM-7B",
+  "max_len": 512,
+  "assumed_checkpoint": false,
+  "dtype": "float16",
+  "device_map": "auto",
+  "q_instr": "Represent this paper search query for retrieval of relevant scientific papers"
+ },
+ "runtime_s": null,
+ "timestamp": "2026-10-31 21:40:00",
+ "task": {
+  "arch": "A4",
+  "arch_name": "MAPLE",
+  "dataset": "maple",
+  "fidelity": "native",
+  "deviations": [],
+  "format_card": {
+   "query": "Aspect query (motivation / method / experiment-result), many per paper",
+   "document": "Whole paper, holistic full text (truncated to model max input)",
+   "answer": "One target paper per query; queries grouped by paper",
+   "search": "Full corpus (73,973 papers)"
+  },
+  "stats": {
+   "n_docs": 73973,
+   "n_queries": 2095,
+   "avg_gold_per_query": 1,
+   "avg_pool_size": null
+  },
+  "unit": "paper",
+  "gold_level": "doc",
+  "has_page_images": false
+ },
+ "note": "Run on Kaggle (2x T4), checkpointed encoding (31 Oct 2026); per-query table incomplete on Kaggle (1902 of 2095 keys, duplicate qids), so stripped and excluded from significance tests."
+}

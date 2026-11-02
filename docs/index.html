@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PFCA Cross-Audit</title>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --ring: rgba(11,11,11,0.10); --wash: rgba(11,11,11,0.04);
+  --accent: #2a78d6; --good: #0ca30c; --good-text: #006300; --warning: #fab219; --serious: #ec835a; --critical: #d03b3b;
+  --empty: #f0efec;
+  --s100:#cde2fb; --s150:#b7d3f6; --s200:#9ec5f4; --s250:#86b6ef; --s300:#6da7ec; --s350:#5598e7;
+  --s400:#3987e5; --s450:#2a78d6; --s500:#256abf; --s550:#1c5cab; --s600:#184f95; --s650:#104281; --s700:#0d366b;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10); --wash: rgba(255,255,255,0.05);
+    --accent: #3987e5; --good-text: #0ca30c; --empty: #262624;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10); --wash: rgba(255,255,255,0.05);
+  --accent: #3987e5; --good-text: #0ca30c; --empty: #262624;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink);
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+header { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; justify-content: space-between; }
+h1 { font-size: 22px; margin: 0 0 4px; letter-spacing: -0.01em; }
+h2 { font-size: 17px; margin: 28px 0 10px; }
+h3 { font-size: 15px; margin: 18px 0 8px; }
+.sub { color: var(--ink-2); margin: 0; max-width: 760px; }
+.muted { color: var(--muted); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 20px 0 8px; }
+.tile { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px; padding: 12px 14px; }
+.tile .v { font-size: 24px; font-weight: 600; }
+.tile .l { color: var(--ink-2); font-size: 12px; }
+nav.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--grid); margin: 22px 0 0; flex-wrap: wrap; }
+nav.tabs button { background: none; border: 0; padding: 10px 14px; font: inherit; color: var(--ink-2);
+  border-bottom: 2px solid transparent; cursor: pointer; }
+nav.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+nav.tabs button:hover { background: var(--wash); }
+.panel { display: none; } .panel.on { display: block; }
+.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 16px; margin-top: 16px; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
+select, .seg button { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--axis);
+  border-radius: 8px; padding: 6px 10px; }
+.seg { display: inline-flex; } .seg button { border-radius: 0; cursor: pointer; }
+.seg button:first-child { border-radius: 8px 0 0 8px; } .seg button:last-child { border-radius: 0 8px 8px 0; }
+.seg button + button { border-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+/* heatmap */
+.hm { display: grid; grid-template-columns: 170px repeat(4, minmax(0, 1fr)); gap: 2px; }
+.hm .colh, .hm .rowh { font-size: 12px; color: var(--ink-2); display: flex; align-items: center; }
+.hm .colh { flex-direction: column; justify-content: center; padding: 6px 4px; font-weight: 600; color: var(--ink); text-align: center; }
+.hm .colh .muted { font-weight: 400; font-size: 11px; }
+.hm .rowh { padding-right: 8px; } .hm .rowh b { color: var(--ink); display: block; font-size: 13px; }
+.cellbtn { position: relative; min-height: 96px; border: 0; border-radius: 4px; cursor: pointer; padding: 10px;
+  text-align: left; font: inherit; display: flex; flex-direction: column; justify-content: space-between; }
+.cellbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.cellbtn:hover { filter: brightness(1.04); box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent); }
+.cellbtn .val { font-size: 22px; font-weight: 650; }
+.cellbtn .who { font-size: 12px; opacity: .9; }
+.cellbtn.pending { background: var(--empty); color: var(--ink-2); outline: 1px dashed var(--axis); outline-offset: -1px; }
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; padding: 1px 7px; border-radius: 99px;
+  border: 1px solid currentColor; white-space: nowrap; }
+.cellbtn .badge { position: absolute; top: 8px; right: 8px; background: var(--surface); color: var(--ink-2); border-color: var(--ring); }
+.legend { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-2); margin-top: 12px; flex-wrap: wrap; }
+.ramp { display: flex; height: 10px; width: 220px; border-radius: 3px; overflow: hidden; }
+.ramp span { flex: 1; }
+/* tables */
+.tw { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { padding: 7px 10px; border-bottom: 1px solid var(--grid); text-align: left; vertical-align: top; }
+th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+tr.click { cursor: pointer; } tr.click:hover td { background: var(--wash); }
+.st { font-size: 12px; color: var(--ink-2); display: inline-flex; gap: 5px; align-items: center; }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.bar { display: inline-block; height: 8px; border-radius: 0 4px 4px 0; background: var(--accent); vertical-align: middle; margin-left: 8px; }
+.fmt { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.fmt > div { border: 1px solid var(--ring); border-radius: 10px; padding: 10px 12px; }
+.fmt .k { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+ul.dev { margin: 6px 0 0; padding-left: 18px; color: var(--ink-2); }
+.tip { position: fixed; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--ring);
+  box-shadow: 0 6px 24px rgba(0,0,0,.15); border-radius: 8px; padding: 8px 10px; font-size: 12px; max-width: 280px;
+  display: none; z-index: 10; }
+.empty-note { border: 1px dashed var(--axis); border-radius: 10px; padding: 14px; color: var(--ink-2); margin-top: 16px; }
+code { font-size: 12px; background: var(--wash); padding: 1px 5px; border-radius: 4px; }
+.theme { font: inherit; background: var(--surface); color: var(--ink); border: 1px solid var(--axis); border-radius: 8px; padding: 6px 10px; cursor: pointer; }
+
+/* analysis */
+.sm { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.sm figure { margin: 0; border: 1px solid var(--ring); border-radius: 10px; padding: 10px 10px 4px; }
+.sm figcaption { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.sm figcaption span { font-weight: 400; color: var(--muted); font-size: 12px; }
+.sm svg { width: 100%; height: auto; display: block; overflow: visible; }
+.sm .hit { fill: transparent; cursor: default; }
+.sm text { font-size: 11px; fill: var(--ink-2); font-family: inherit; }
+.sm text.v { fill: var(--ink); font-weight: 600; }
+.sm text.own { fill: var(--ink); font-weight: 650; }
+.lg { display: inline-flex; align-items: center; gap: 6px; margin-right: 14px; font-size: 12px; color: var(--ink-2); }
+.lg i { display: inline-block; width: 12px; height: 10px; border-radius: 2px; }
+.lg i.tick { height: 0; width: 14px; border-top: 2px solid var(--ink); border-radius: 0; }
+.chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; padding: 1px 7px; border-radius: 99px; border: 1px solid currentColor; white-space: nowrap; }
+.chip.ok { color: var(--good-text); } .chip.hi { color: var(--accent); } .chip.lo { color: var(--critical); } .chip.na { color: var(--muted); }
+.kpi { font-size: 13px; color: var(--ink-2); margin: 6px 0 0; }
+details summary { cursor: pointer; color: var(--ink-2); font-size: 13px; margin-top: 10px; }
+@media (max-width: 760px) {
+  .hm { grid-template-columns: 92px repeat(4, minmax(64px, 1fr)); }
+  .hm-scroll { overflow-x: auto; }
+  .cellbtn { min-height: 80px; padding: 8px; } .cellbtn .val { font-size: 17px; } .cellbtn .badge { display: none; }
+  .hm .colh { font-size: 10px; } .hm .colh .muted { display: none; } .cellbtn .who { font-size: 11px; }
+}
+@media (forced-colors: active) { .cellbtn { border: 1px solid CanvasText; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Protocol-Faithful Cross-Audit</h1>
+      <p class="sub">Four retrieval architectures (LitSearch, DORIS-MAE, IRPAPERS, MAPLE) × four datasets = 16 evaluations.
+        Each dataset is rebuilt into the exact query, document and answer format of each paper. Headline metric: <b>Recall@10</b>.</p>
+    </div>
+    <button class="theme" id="theme" aria-label="Toggle colour theme">Theme</button>
+  </header>
+
+  <div class="tiles" id="tiles"></div>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="overview" aria-selected="true">Overview</button>
+    <button role="tab" data-tab="analysis" aria-selected="false">Analysis</button>
+    <button role="tab" data-tab="archs" aria-selected="false">By architecture</button>
+    <button role="tab" data-tab="cell" aria-selected="false">Cell detail</button>
+    <button role="tab" data-tab="framework" aria-selected="false">Framework</button>
+  </nav>
+
+  <section class="panel on" id="p-overview">
+    <div class="card">
+      <div class="controls">
+        <span class="muted">Show in each cell:</span>
+        <div class="seg" id="ovMode">
+          <button data-v="best" aria-pressed="true">Best model</button>
+          <button data-v="bm25" aria-pressed="false">BM25 (in all 4 zoos)</button>
+        </div>
+      </div>
+      <div class="hm-scroll"><div class="hm" id="heat" role="grid" aria-label="Recall@10 by architecture and dataset"></div></div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div id="ovNote"></div>
+  </section>
+
+  <section class="panel" id="p-analysis"><div id="an"><div class="empty-note">Analysis not built yet: run <code>python xaudit/analysis.py</code>.</div></div></section>
+  <section class="panel" id="p-archs"><div id="archTables"></div></section>
+  <section class="panel" id="p-cell"><div id="cellDetail"></div></section>
+  <section class="panel" id="p-framework"><div id="fw"></div></section>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+const STEPS = ["--s100","--s150","--s200","--s250","--s300","--s350","--s400","--s450","--s500","--s550","--s600","--s650","--s700"];
+const STATUS = {
+  done: {label: "Done", color: "var(--good)"},
+  pending: {label: "Pending", color: "var(--muted)"},
+  failed: {label: "Failed", color: "var(--critical)"},
+  api: {label: "API · not run", color: "var(--warning)"},
+  na: {label: "N/A", color: "var(--axis)"},
+  external: {label: "External code", color: "var(--serious)"},
+  too_large: {label: "Too large for free GPUs", color: "var(--axis)"},
+};
+const FID = {native: "Native", faithful: "Faithful", approximate: "Approximate"};
+let DATA = null, state = {ov: "best", cell: null, tab: "overview"};
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt = v => (v === null || v === undefined || Number.isNaN(v)) ? "–" : (Math.round(v * 10) / 10).toFixed(1);
+const dsName = id => DATA.datasets.find(d => d.id === id).name;
+const archOf = id => DATA.archs.find(a => a.id === id);
+
+function stepFor(v) { const i = Math.min(STEPS.length - 1, Math.max(0, Math.round(v / 100 * (STEPS.length - 1)))); return i; }
+function statusChip(st) { const s = STATUS[st] || STATUS.pending;
+  return `<span class="st"><span class="dot" style="background:${s.color}" aria-hidden="true"></span>${s.label}</span>`; }
+
+// ---------------------------------------------------------------- theme
+(function(){ let t = null; try { t = localStorage.getItem("pfca-theme"); } catch(e) {}
+  if (t) document.documentElement.dataset.theme = t;
+  $("#theme").onclick = () => { const cur = document.documentElement.dataset.theme ||
+      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const nx = cur === "dark" ? "light" : "dark"; document.documentElement.dataset.theme = nx;
+    try { localStorage.setItem("pfca-theme", nx); } catch(e) {} }; })();
+
+// ---------------------------------------------------------------- tabs
+document.querySelectorAll("nav.tabs button").forEach(b => b.onclick = () => showTab(b.dataset.tab));
+function showTab(t) { state.tab = t;
+  document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === t));
+  document.querySelectorAll(".panel").forEach(p => p.classList.toggle("on", p.id === "p-" + t)); }
+document.querySelectorAll("#ovMode button").forEach(b => b.onclick = () => { state.ov = b.dataset.v;
+  document.querySelectorAll("#ovMode button").forEach(x => x.setAttribute("aria-pressed", x === b)); renderHeat(); });
+
+// ---------------------------------------------------------------- tooltip
+const tip = $("#tip");
+function showTip(e, html) { tip.innerHTML = html; tip.style.display = "block";
+  const x = Math.min(e.clientX + 14, innerWidth - tip.offsetWidth - 8), y = Math.min(e.clientY + 14, innerHeight - tip.offsetHeight - 8);
+  tip.style.left = x + "px"; tip.style.top = y + "px"; }
+function hideTip() { tip.style.display = "none"; }
+
+// ---------------------------------------------------------------- render
+function render() {
+  const cells = Object.values(DATA.cells);
+  const runnable = cells.reduce((a, c) => a + c.n_runnable, 0);
+  const prepared = cells.filter(c => c.prepared).length;
+  const apiN = cells.reduce((a, c) => a + c.models.filter(m => m.status === "api").length, 0);
+  $("#tiles").innerHTML = [
+    [DATA.n_results + " / " + runnable, "model runs completed (open models)"],
+    [cells.filter(c => c.n_done).length + " / 16", "cells with at least one result"],
+    [prepared + " / 16", "cells refined (task cards written)"],
+    [apiN, "API model slots listed, not run"],
+  ].map(([v, l]) => `<div class="tile"><div class="v">${v}</div><div class="l">${l}</div></div>`).join("") +
+  `<div class="tile"><div class="v" style="font-size:15px;padding-top:6px">${esc(DATA.generated)}</div><div class="l">results snapshot (static copy)</div></div>`;
+  renderHeat(); renderArchs(); renderFramework(); if (state.cell) renderCell(state.cell);
+  $("#ovNote").innerHTML = DATA.n_results ? "" : `<div class="empty-note"><b>No results yet.</b> Every cell is pending.
+    Run <code>python -m xaudit.run --prepare</code>, then <code>python -m xaudit.run --arch all --dataset all --tier local</code>.
+    Results appear here as each run finishes.</div>`;
+}
+
+function renderHeat() {
+  const h = $("#heat"); let html = `<div></div>`;
+  DATA.datasets.forEach(d => html += `<div class="colh" role="columnheader">${esc(d.name)}<span class="muted">dataset</span></div>`);
+  DATA.archs.forEach(a => {
+    html += `<div class="rowh" role="rowheader"><span><b>${a.id} · ${esc(a.name)}</b>architecture</span></div>`;
+    DATA.datasets.forEach(d => {
+      const c = DATA.cells[`${a.id}__${d.id}`];
+      let v = null, who = "";
+      if (state.ov === "best" && c.best) { v = c.best["recall@10"]; who = c.best.name; }
+      if (state.ov === "bm25") { const m = c.models.find(m => m.key === "bm25"); if (m && m.status === "done") { v = m["recall@10"]; who = "BM25"; } }
+      const badge = `<span class="badge">${FID[c.fidelity]}</span>`;
+      if (v === null) {
+        html += `<button class="cellbtn pending" data-cell="${a.id}__${d.id}" aria-label="${a.name} on ${d.name}: pending">
+          ${badge}<span class="val">–</span><span class="who">Pending · ${c.n_runnable} runnable models</span></button>`;
+      } else {
+        const i = stepFor(v), fg = i >= 7 ? "#ffffff" : "#0b0b0b";
+        html += `<button class="cellbtn" data-cell="${a.id}__${d.id}" style="background:var(${STEPS[i]});color:${fg}"
+          aria-label="${a.name} on ${d.name}: Recall@10 ${fmt(v)} (${esc(who)})">${badge}
+          <span class="val">${fmt(v)}</span><span class="who">${esc(who)} · ${c.n_done}/${c.n_runnable} run${(() => { const p = c.models.filter(m => m.status === "pending").length; return p ? ` · <b>${p} pending</b>` : ""; })()}</span></button>`;
+      }
+    });
+  });
+  h.innerHTML = html;
+  h.querySelectorAll(".cellbtn").forEach(b => {
+    const c = DATA.cells[b.dataset.cell];
+    b.onclick = () => { state.cell = b.dataset.cell; renderCell(state.cell); showTab("cell"); };
+    b.onmousemove = e => showTip(e, `<b>${esc(archOf(c.arch).name)} architecture × ${esc(dsName(c.dataset))}</b><br>
+      Fidelity: ${FID[c.fidelity]}<br>Best Recall@10: ${c.best ? fmt(c.best["recall@10"]) + " (" + esc(c.best.name) + ")" : "–"}<br>
+      Models done: ${c.n_done} of ${c.n_runnable} runnable<br><span class="muted">Click for details</span>`);
+    b.onmouseleave = hideTip;
+  });
+  $("#legend").innerHTML = `<span>Recall@10</span><span>0</span><div class="ramp">${STEPS.map(s => `<span style="background:var(${s})"></span>`).join("")}</div><span>100</span>
+    <span style="margin-left:12px" class="badge">Native</span><span class="badge">Faithful</span><span class="badge">Approximate</span>
+    <span class="muted">= how closely the dataset could be rebuilt in that paper's format</span>`;
+}
+
+function renderArchs() {
+  let html = "";
+  DATA.archs.forEach(a => {
+    html += `<div class="card"><h3 style="margin-top:0">${a.id} · ${esc(a.name)} architecture <span class="muted" style="font-weight:400">— ${esc(a.paper)}</span></h3>
+      <p class="muted" style="margin:0 0 10px">Query: ${esc(a.query)} · Document: ${esc(a.document)} · Answer: ${esc(a.answer)}</p>
+      <div class="tw"><table><thead><tr><th>Model</th>${DATA.datasets.map(d => `<th class="num">${esc(d.name)}${d.id === a.native_dataset ? " (own)" : ""}</th>`).join("")}</tr></thead><tbody>`;
+    a.zoo.forEach(z => {
+      html += `<tr><td>${esc(z.name)} <span class="muted" style="font-size:12px">${z.tier === "kaggle" ? "· Kaggle GPU" : ""}</span></td>`;
+      DATA.datasets.forEach(d => {
+        const m = DATA.cells[`${a.id}__${d.id}`].models.find(x => x.key === z.key);
+        html += m.status === "done"
+          ? `<td class="num" title="Recall@10">${fmt(m["recall@10"])}<span class="bar" style="width:${Math.max(2, m["recall@10"] * 0.5)}px"></span></td>`
+          : `<td class="num">${statusChip(m.status)}</td>`;
+      });
+      html += `</tr>`;
+    });
+    html += `</tbody></table></div><p class="muted" style="font-size:12px;margin:8px 0 0">Values are Recall@10 (%). Click a cell on the Overview tab for native metrics.</p></div>`;
+  });
+  $("#archTables").innerHTML = html;
+}
+
+const GATE_NOTES = {
+  "A3__mm-hybrid": "Ours is higher on R@5. Like the text hybrid, our search is exact where the paper used an approximate HNSW index.",
+  "A3__muvera": "Ours is lower (R@20 80.5 vs 88). MUVERA here is our own implementation of fixed-dimensional encodings over ColModernVBERT; the paper's MUVERA build was not released, so encoding details may differ.",
+  "A4__instructor-xl-maple": "Ours is higher on AnyAspect@20 (+10). Run on Kaggle with the MAPLE instruction and 512-token full-text truncation; the paper's truncation length is not stated. Cause not confirmed.",
+  "A1__bm25": "Built-in Lucene-formula BM25 with Pyserini parameters (k1=0.9, b=0.4); tokenizer/stemmer differences from the paper's Pyserini index.",
+  "A2__simcse": "The paper does not name its SimCSE checkpoint; the canonical public one was used.",
+  "A2__bm25": "Ours is higher. The paper's BM25 scores below its own TF-IDF, which points to a weaker original implementation; ours uses Lucene/Pyserini parameters.",
+  "A2__colbert-v2": "Ours is higher. Official ColBERTv2 checkpoint with exact late-interaction scoring over each pool.",
+  "A2__ernie": "Ours is higher on R@20. ERNIE is a general-purpose encoder not trained for retrieval, so its score depends heavily on pooling, which the paper does not specify (mean pooling used here). Cause not confirmed.",
+  "A2__scibert": "Ours is higher on R@20. SciBERT is not retrieval-trained, so its score depends heavily on pooling, which the paper does not specify (mean pooling used here). Cause not confirmed.",
+  "A2__ance-firstp": "MRR@10 (about 4 points) and NDCGexp@10% (about 3.3 points) are lower than the paper; the other four metrics are within ±3.",
+  "A3__colpali": "R@5 is 3.0 points below the paper (just outside the band). Run in float16 on a Kaggle T4, because float32 did not fit in its memory and T4s have no bfloat16; the paper used bfloat16.",
+  "A3__hybrid-text": "Ours is higher on R@5. We search exactly, where the paper used Weaviate's approximate HNSW index (ef=160); exact search can only match or beat it.",
+  "A4__specter2-maple": "Ours is higher. We use the official SPECTER2 proximity adapter (title [SEP] text); the paper's SPECTER2 scores below its own BM25, which suggests the base model was run without the adapter."
+};
+function gateOf(c, m) {
+  if (!c.native || m.status !== "done" || !m.reported || !m.native) return null;
+  let worst = null, worstKey = null;
+  Object.keys(m.reported).forEach(k => {
+    const ours = m.native[k], paper = Number(m.reported[k]);
+    if (ours === undefined || ours === null || isNaN(paper)) return;
+    const d = ours - paper;
+    if (worst === null || Math.abs(d) > Math.abs(worst)) { worst = d; worstKey = k; }
+  });
+  if (worst === null) return null;
+  return {pass: Math.abs(worst) <= 3, delta: worst, key: worstKey, note: GATE_NOTES[c.arch + "__" + m.key] || ""};
+}
+function gateChip(g) {
+  if (!g) return "";
+  const sign = g.delta > 0 ? "+" : "";
+  return g.pass
+    ? ` <span class="badge" style="color:var(--good,#2e7d32);border-color:currentColor" title="All shared metrics within ±3 points of the paper">✓ matches paper</span>`
+    : ` <span class="badge" style="color:var(--bad,#c62828);border-color:currentColor" title="${esc(g.note)}">outside ±3 (${esc(g.key)} ${sign}${fmt(g.delta)})</span>`;
+}
+
+function renderCell(id) {
+  const c = DATA.cells[id], a = archOf(c.arch);
+  const fc = c.format_card || {query: a.query, document: a.document, answer: a.answer, search: a.search};
+  const metricKeys = new Set();
+  c.models.forEach(m => m.native && Object.keys(m.native).forEach(k => { if (!k.endsWith("_se") && !k.startsWith("n_") && !k.startsWith("avg_")) metricKeys.add(k); }));
+  if (c.native) c.models.forEach(m => m.reported && Object.keys(m.reported).forEach(k => metricKeys.add(k)));
+  const mk = [...metricKeys];
+  let html = `<div class="card"><div class="controls"><label class="muted" for="cellSel">Cell:</label><select id="cellSel">
+    ${Object.values(DATA.cells).map(x => `<option value="${x.arch}__${x.dataset}" ${x.arch + "__" + x.dataset === id ? "selected" : ""}>${x.arch} ${esc(archOf(x.arch).name)} architecture × ${esc(dsName(x.dataset))}</option>`).join("")}
+    </select></div>
+    <h2 style="margin-top:4px">${esc(a.name)} architecture × ${esc(dsName(c.dataset))} dataset <span class="badge" style="vertical-align:middle;color:var(--ink-2)">${FID[c.fidelity]}</span></h2>
+    <div class="fmt"><div><div class="k">Query format</div>${esc(fc.query)}</div><div><div class="k">Document format</div>${esc(fc.document)}</div>
+    <div><div class="k">Answer format</div>${esc(fc.answer)}</div><div><div class="k">Search space</div>${esc(fc.search)}</div></div>
+    ${c.stats ? `<p class="muted" style="margin:10px 0 0">${c.stats.n_queries.toLocaleString()} queries · ${c.stats.n_docs.toLocaleString()} documents · ${c.stats.avg_gold_per_query} relevant per query${c.stats.avg_pool_size ? " · pool " + c.stats.avg_pool_size : ""}</p>` : `<p class="muted" style="margin:10px 0 0">Not refined yet (run <code>python -m xaudit.run --prepare</code>).</p>`}
+    ${c.deviations.length ? `<h3>How this dataset was refined for this architecture</h3><ul class="dev">${c.deviations.map(d => `<li>${esc(d.replace("[approx] ", ""))}${d.startsWith("[approx]") ? " <b>(approximation)</b>" : ""}</li>`).join("")}</ul>` : `<p class="muted">Native cell: the paper's own dataset in its own format. These results validate the setup against the published numbers.</p>`}
+    </div>`;
+  html += `<div class="card"><h3 style="margin-top:0">Models</h3><div class="tw"><table><thead><tr><th>Model</th><th>Status</th><th class="num">Recall@10</th>
+    ${mk.map(k => `<th class="num">${esc(k)}</th>`).join("")}</tr></thead><tbody>`;
+  c.models.forEach(m => {
+    const g = gateOf(c, m);
+    html += `<tr><td>${esc(m.name)}${m.assumed ? ' <span class="muted" title="Checkpoint not named in the paper; canonical one used">*</span>' : ""}${gateChip(g)}<br><span class="muted" style="font-size:11px">${esc(m.ckpt || "")}</span>${g && !g.pass && g.note ? `<br><span class="muted" style="font-size:11px">${esc(g.note)}</span>` : ""}</td>
+      <td>${statusChip(m.status)}${m.reason && m.status !== "done" ? `<br><span class="muted" style="font-size:11px">${esc(m.reason)}</span>` : ""}</td>
+      <td class="num"><b>${m.status === "done" ? fmt(m["recall@10"]) : "–"}</b></td>
+      ${mk.map(k => `<td class="num">${m.native && m.native[k] !== undefined ? fmt(m.native[k]) : "–"}${m.reported && m.reported[k] !== undefined ? `<br><span class="muted" style="font-size:11px;white-space:nowrap">paper ${m.reported[k]}</span>` : ""}</td>`).join("")}</tr>`;
+  });
+  html += `</tbody></table></div><p class="muted" style="font-size:12px;margin:8px 0 0">* checkpoint not named in the paper; canonical public checkpoint used.
+    Native metrics follow the paper (${esc(a.native_metrics)}). Numbers are percentages.${c.native ? " Grey “paper” values are the published numbers: a reproduction within ±3 points validates this architecture." : ""}</p></div>`;
+  const bd = c.models.filter(m => m.status === "done" && m.breakdown && Object.keys(m.breakdown).length);
+  if (bd.length) {
+    const groups = [...new Set(bd.flatMap(m => Object.keys(m.breakdown)))];
+    html += `<div class="card"><h3 style="margin-top:0">Recall@10 by query group</h3><div class="tw"><table><thead><tr><th>Model</th>${groups.map(g => `<th class="num">${esc(g)}</th>`).join("")}</tr></thead><tbody>
+      ${bd.map(m => `<tr><td>${esc(m.name)}</td>${groups.map(g => `<td class="num">${m.breakdown[g] ? fmt(m.breakdown[g]["R@10"]) + ` <span class="muted">(n=${m.breakdown[g].n})</span>` : "–"}</td>`).join("")}</tr>`).join("")}
+      </tbody></table></div></div>`;
+  }
+  $("#cellDetail").innerHTML = html;
+  $("#cellSel").onchange = e => { state.cell = e.target.value; renderCell(state.cell); };
+}
+
+function renderFramework() {
+  let html = `<div class="card"><h3 style="margin-top:0">The three factors per architecture</h3><div class="tw"><table><thead><tr><th>Architecture</th><th>Query format</th><th>Document format</th><th>Answer format</th><th>Search space</th><th>Native metrics</th></tr></thead><tbody>
+    ${DATA.archs.map(a => `<tr><td><b>${a.id} ${esc(a.name)}</b><br><span class="muted">${esc(a.paper)}</span></td><td>${esc(a.query)}</td><td>${esc(a.document)}</td><td>${esc(a.answer)}</td><td>${esc(a.search)}</td><td>${esc(a.native_metrics)}</td></tr>`).join("")}
+    </tbody></table></div></div>
+    <div class="card"><h3 style="margin-top:0">Refinement rules (same for every cell)</h3><ol style="margin:0;padding-left:18px;color:var(--ink-2)">
+    <li><b>Query:</b> text passed unchanged; missing structure (specificity, sentences, aspect groups) derived by fixed rules, never generated.</li>
+    <li><b>Document:</b> mapped to the architecture's unit: pages lifted to papers, full text split into pseudo-pages, or best available text, flagged.</li>
+    <li><b>Answer:</b> gold translated, never invented: binary↔graded (gold = 2; relevant iff ≥ 1), many-gold → one-target pairs, page↔paper gold.</li>
+    <li><b>Search space:</b> full corpus for LitSearch, IRPAPERS and MAPLE; DORIS-style 100-paper pools for DORIS-MAE.</li>
+    <li><b>Fidelity flag</b> on every cell: native / faithful / approximate, with the exact deviations listed.</li></ol>
+    <p class="muted" style="margin:10px 0 0">Recall@10 = mean over queries of |gold ∩ top-10| / |gold|, computed in each architecture's own answer format. With one gold item it equals Success@10.</p></div>
+    <div class="card"><h3 style="margin-top:0">Model zoos</h3>${DATA.archs.map(a => `<p style="margin:6px 0"><b>${a.id} ${esc(a.name)}:</b> ${a.zoo.map(z => esc(z.name) + (z.tier === "api" ? " (API)" : "")).join(" · ")}</p>`).join("")}</div>`;
+  $("#fw").innerHTML = html;
+}
+
+
+// ---------------------------------------------------------------- analysis tab
+let AN = null;
+const ARCHN = {A1: "LitSearch", A2: "DORIS-MAE", A3: "IRPAPERS", A4: "MAPLE"};
+const DSO = ["litsearch", "doris_mae", "irpapers", "maple"];
+const DSN = {litsearch: "LitSearch", doris_mae: "DORIS-MAE", irpapers: "IRPAPERS", maple: "MAPLE"};
+const pfmt = p => p === null || p === undefined ? "–" : (p < 0.001 ? "<0.001" : p.toFixed(3));
+function verdictChip(v) {
+  if (v.status !== "done") return `<span class="chip na">${v.status === "pending" ? "pending" : "not run"}</span>`;
+  if (v.verdict === "pass") return `<span class="chip ok">✓ within ±3</span>`;
+  return v.direction === "higher" ? `<span class="chip hi">▲ ours higher</span>` : `<span class="chip lo">▼ ours lower</span>`;
+}
+function renderAnalysis() {
+  if (!AN) return;
+  const h = AN.headline, V = h.validation, R = h.ranking;
+  const maxSpread = Math.max(...Object.values(h.bm25_format_spread));
+  let html = `<div class="tiles" style="margin-top:16px">
+    <div class="tile"><div class="v">${V.passed} / ${V.checked}</div><div class="l">paper checks within ±3 points (${V.outside_higher} above, ${V.outside_lower} below the paper)</div></div>
+    <div class="tile"><div class="v">${R.mean_tau ?? "–"}</div><div class="l">mean Kendall τ: native ranking vs ranking on other datasets</div></div>
+    <div class="tile"><div class="v">${R.winner_kept}</div><div class="l">off-diagonal cells where the native winner stays best</div></div>
+    <div class="tile"><div class="v">${fmt(maxSpread)}</div><div class="l">largest BM25 Recall@10 swing on one dataset caused by format alone</div></div>
+    <div class="tile"><div class="v">${h.n_pending}</div><div class="l">runs still pending (Kaggle, after quota reset)</div></div></div>
+    <p class="muted" style="font-size:12px;margin:0">Analysis built ${esc(AN.generated)} from ${h.n_results} results. Significance: paired sign-flip permutation test on per-query Recall@10 (${AN.n_perm.toLocaleString()} permutations), Holm-corrected within each cell, α = ${AN.alpha}.</p>`;
+
+  // ---- own dataset vs others (small multiples)
+  html += `<div class="card"><h3 style="margin-top:0">Own dataset vs the other three</h3>
+    <p class="kpi">Best model's Recall@10 in each cell, per architecture. The dark tick is BM25 in the same cell. The darker bar is the architecture's own dataset.</p>
+    <div style="margin:8px 0 10px"><span class="lg"><i style="background:var(--s650)"></i>Best model, own dataset</span><span class="lg"><i style="background:var(--s350)"></i>Best model, other dataset</span><span class="lg"><i class="tick"></i>BM25</span></div><div class="sm">`;
+  const W = 260, H = 184, L = 26, B = 46, T = 18, bw = 38, gap = (W - L - 4 * bw) / 4;
+  Object.keys(ARCHN).forEach(a => {
+    let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${ARCHN[a]} architecture: best Recall@10 on each dataset">`;
+    [0, 50, 100].forEach(t => { const y = T + (H - T - B) * (1 - t / 100);
+      svg += `<line x1="${L}" x2="${W}" y1="${y}" y2="${y}" stroke="var(--grid)" stroke-width="1"/><text x="${L - 4}" y="${y + 4}" text-anchor="end">${t}</text>`; });
+    DSO.forEach((d, i) => {
+      const c = AN.cells[`${a}__${d}`], x = L + gap / 2 + i * (bw + gap), own = AN.native[a] === d;
+      const base = T + (H - T - B);
+      if (c.best) {
+        const v = c.best.r10, y = T + (H - T - B) * (1 - v / 100), hgt = base - y;
+        svg += `<path d="M${x},${base} V${y + 4} Q${x},${y} ${x + 4},${y} H${x + bw - 4} Q${x + bw},${y} ${x + bw},${y + 4} V${base} Z" fill="var(${own ? "--s650" : "--s350"})"/>`;
+        svg += `<text class="v" x="${x + bw / 2}" y="${y - 4}" text-anchor="middle">${fmt(v)}</text>`;
+        if (c.bm25 !== null) { const yb = T + (H - T - B) * (1 - c.bm25 / 100);
+          svg += `<line x1="${x - 3}" x2="${x + bw + 3}" y1="${yb}" y2="${yb}" stroke="var(--ink)" stroke-width="2"/>`; }
+      }
+      svg += `<text class="${own ? "own" : ""}" x="${x + bw / 2}" y="${base + 14}" text-anchor="middle">${DSN[d].replace("DORIS-MAE", "DORIS")}</text>`;
+      const sub = [own ? "own" : null, c.pending.length ? c.pending.length + " pending" : null].filter(Boolean);
+      sub.forEach((t, j) => svg += `<text x="${x + bw / 2}" y="${base + 27 + j * 12}" text-anchor="middle">${t}</text>`);
+      svg += `<rect class="hit" data-c="${a}__${d}" x="${x - gap / 2}" y="${T - 10}" width="${bw + gap}" height="${H - T - B + 10}"/>`;
+    });
+    svg += `</svg>`;
+    html += `<figure><figcaption>${a} · ${ARCHN[a]} <span>architecture</span></figcaption>${svg}</figure>`;
+  });
+  html += `</div><details><summary>Show as a table</summary><div class="tw"><table><thead><tr><th>Architecture</th>${DSO.map(d => `<th class="num">${DSN[d]}</th>`).join("")}</tr></thead><tbody>
+    ${Object.keys(ARCHN).map(a => `<tr><td>${a} ${ARCHN[a]}</td>${DSO.map(d => { const c = AN.cells[`${a}__${d}`];
+      return `<td class="num">${c.best ? `<b>${fmt(c.best.r10)}</b> ${esc(c.best.name)}<br><span class="muted">BM25 ${fmt(c.bm25)}${AN.native[a] === d ? " · own" : ""}</span>` : "–"}</td>`; }).join("")}</tr>`).join("")}
+    </tbody></table></div></details></div>`;
+
+  // ---- paper checks
+  html += `<div class="card"><h3 style="margin-top:0">Paper checks (own-dataset cells)</h3>
+    <p class="kpi">Each model the paper reports, on its own dataset, compared metric by metric. Shown: the metric furthest from the paper. Gate = every shared metric within ±${AN.gate} points.</p>
+    <div class="tw"><table><thead><tr><th>Architecture</th><th>Model</th><th>Result</th><th>Furthest metric (ours / paper)</th><th>Why it differs</th></tr></thead><tbody>`;
+  AN.validation.forEach(v => {
+    let worst = "–";
+    if (v.metrics && v.metrics.length) { const w = v.metrics.reduce((x, y) => Math.abs(y.diff) > Math.abs(x.diff) ? y : x);
+      worst = `${esc(w.metric)}: ${fmt(w.measured)} / ${w.reported} <span class="muted">(${w.diff > 0 ? "+" : ""}${fmt(w.diff)})</span>`; }
+    const note = v.status === "done" && v.verdict !== "pass" ? (GATE_NOTES[v.arch + "__" + v.key] || "") : "";
+    html += `<tr><td>${v.arch} ${ARCHN[v.arch]}</td><td>${esc(v.name)}</td><td>${verdictChip(v)}</td><td class="num" style="text-align:left">${worst}</td><td class="muted" style="font-size:12px;max-width:380px">${esc(note)}</td></tr>`;
+  });
+  html += `</tbody></table></div></div>`;
+
+  // ---- ranking stability
+  html += `<div class="card"><h3 style="margin-top:0">Do model rankings survive a new dataset?</h3>
+    <p class="kpi">For each architecture, its models are ranked on its own dataset and again on each other dataset (same models in both). τ = 1 means the same order; 0 means unrelated; negative means reversed.</p>
+    <div class="tw"><table><thead><tr><th>Architecture</th><th>Other dataset</th><th class="num">Models</th><th class="num">Kendall τ</th><th>Best on own dataset → best here</th><th>Biggest rank moves (own → here)</th></tr></thead><tbody>
+    ${AN.ranking.map(r => `<tr><td>${r.arch} ${ARCHN[r.arch]}</td><td>${DSN[r.dataset]}</td><td class="num">${r.n_models}${r.few_models ? ' <span class="muted" title="Fewer than 4 shared models: τ is very coarse and is left out of the mean">*</span>' : ""}</td>
+      <td class="num"><b>${r.tau ?? "–"}</b></td><td>${esc(r.native_best || "–")} → ${esc(r.foreign_best || "–")} ${r.winner_kept === undefined ? "" : r.winner_kept ? '<span class="chip ok">kept</span>' : '<span class="chip lo">changed</span>'}</td>
+      <td class="muted" style="font-size:12px">${(r.biggest_moves || []).map(m => `${esc(m.name)} ${m.native_rank}→${m.rank}`).join(" · ")}</td></tr>`).join("")}
+    </tbody></table></div><p class="muted" style="font-size:12px;margin:8px 0 0">* fewer than 4 shared models (IRPAPERS' image models cannot run on the text-only datasets); left out of the mean τ.</p></div>`;
+
+  // ---- format effect
+  html += `<div class="card"><h3 style="margin-top:0">Same model, same dataset, different format</h3>
+    <p class="kpi">The identical model scored under each architecture's query / document / answer format. The spread is the effect of format alone.</p>
+    <div class="tw"><table><thead><tr><th>Model</th><th>Dataset</th>${Object.keys(ARCHN).map(a => `<th class="num">${a} ${ARCHN[a]} format</th>`).join("")}<th class="num">Spread</th></tr></thead><tbody>
+    ${AN.format.map(f => `<tr><td>${esc(f.model)}</td><td>${DSN[f.dataset]}</td>${Object.keys(ARCHN).map(a => `<td class="num">${f.by_arch[a] !== undefined ? fmt(f.by_arch[a]) + (AN.native[a] === f.dataset ? ' <span class="muted">own</span>' : "") : "–"}</td>`).join("")}<td class="num"><b>${fmt(f.spread)}</b></td></tr>`).join("")}
+    </tbody></table></div></div>`;
+
+  // ---- significance
+  const ids = Object.keys(AN.significance);
+  html += `<div class="card"><h3 style="margin-top:0">Are the differences real? (significance)</h3>
+    <p class="kpi">Top tier = the best model plus every model not significantly below it. Pick a cell to see each test.</p>
+    <div class="tw"><table><thead><tr><th>Cell</th><th>Top tier</th><th class="num">Significant tests</th></tr></thead><tbody>
+    ${ids.map(id => { const s = AN.significance[id], [a, d] = id.split("__"), n = s.tests.filter(t => t.p !== null).length, k = s.tests.filter(t => t.significant).length;
+      return `<tr class="click" data-sig="${id}"><td>${a} ${ARCHN[a]} × ${DSN[d]}</td><td>${s.top_tier ? s.top_tier.map(esc).join(", ") + (s.top_tier_untested && s.top_tier_untested.length ? ` <span class="muted">(not testable against: ${s.top_tier_untested.map(esc).join(", ")})</span>` : "") : '<span class="muted">best model has no per-query scores (MAPLE Kaggle run), so not testable</span>'}</td><td class="num">${k} / ${n}</td></tr>`; }).join("")}
+    </tbody></table></div>
+    <div class="controls" style="margin-top:14px"><label class="muted" for="sigSel">Tests in cell:</label><select id="sigSel">${ids.map(id => { const [a, d] = id.split("__"); return `<option value="${id}">${a} ${ARCHN[a]} × ${DSN[d]}</option>`; }).join("")}</select></div>
+    <div id="sigTests"></div>
+    <p class="muted" style="font-size:12px;margin:8px 0 0">Three Kaggle runs on the MAPLE dataset (Instructor-XL in A1 and A4, LLaMA in A2) saved incomplete per-query tables (duplicate query IDs overwrote each other), so they are left out of the tests. Their Recall@10 values are complete and unaffected.</p></div>`;
+  $("#an").innerHTML = html;
+
+  const sel = $("#sigSel");
+  const drawSig = id => { const s = AN.significance[id];
+    $("#sigTests").innerHTML = `<div class="tw"><table><thead><tr><th>Comparison</th><th class="num">Δ Recall@10</th><th class="num">Queries</th><th class="num">p</th><th class="num">p (Holm)</th><th>Verdict</th></tr></thead><tbody>
+      ${s.tests.map(t => `<tr><td>${esc(t.a)} vs ${esc(t.b)} <span class="muted" style="font-size:11px">${t.kind === "adjacent" ? "next in rank" : t.kind === "best_vs_bm25" ? "best vs BM25" : "best vs"}</span></td>
+        <td class="num">${t.diff > 0 ? "+" : ""}${fmt(t.diff)}</td><td class="num">${t.n ?? "–"}</td><td class="num">${pfmt(t.p)}</td><td class="num">${pfmt(t.p_holm)}</td>
+        <td>${t.p === null ? `<span class="chip na">${esc(t.reason)}</span>` : t.significant ? '<span class="chip ok">significant</span>' : '<span class="chip na">not significant</span>'}</td></tr>`).join("")}
+      </tbody></table></div>`; };
+  sel.onchange = e => drawSig(e.target.value); drawSig(sel.value);
+  document.querySelectorAll("#an tr[data-sig]").forEach(r => r.onclick = () => { sel.value = r.dataset.sig; drawSig(r.dataset.sig); sel.scrollIntoView({block: "nearest"}); });
+  document.querySelectorAll("#an .hit").forEach(r => {
+    const c = AN.cells[r.dataset.c], [a, d] = r.dataset.c.split("__"), s = AN.significance[r.dataset.c];
+    r.onmousemove = e => showTip(e, `<b>${ARCHN[a]} format × ${DSN[d]}</b>${AN.native[a] === d ? " (own)" : ""}<br>
+      Best: ${c.best ? esc(c.best.name) + " " + fmt(c.best.r10) : "–"}<br>BM25: ${fmt(c.bm25)}${c.best_gain_over_bm25 !== null ? ` (best is ${c.best_gain_over_bm25 >= 0 ? "+" : ""}${fmt(c.best_gain_over_bm25)})` : ""}<br>
+      ${s && s.top_tier ? "Top tier: " + s.top_tier.map(esc).join(", ") + "<br>" : ""}${c.pending.length ? "Pending: " + c.pending.map(esc).join(", ") : ""}`);
+    r.onmouseleave = hideTip;
+  });
+}
+async function loadAnalysis() {
+  try { const r = await fetch("analysis.json?_=" + Date.now()); if (r.ok) { AN = await r.json(); renderAnalysis(); } } catch (e) {}
+}
+loadAnalysis();
+
+async function load() {
+  try { const r = await fetch("data.json?_=" + Date.now()); DATA = await r.json(); render(); }
+  catch (e) { $("#tiles").innerHTML = `<div class="empty-note">Could not load data.json. Run <code>python build_pages.py</code> and commit <code>docs/</code>.</div>`; }
+}
+load();
+</script>
+</body>
+</html>
